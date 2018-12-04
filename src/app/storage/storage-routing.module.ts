@@ -3,7 +3,6 @@ import {RouterModule} from "@angular/router";
 import {ImporterComponent} from "./importer/importer.component";
 
 @NgModule({
-  declarations: [],
   imports: [
     RouterModule.forChild([
       {
