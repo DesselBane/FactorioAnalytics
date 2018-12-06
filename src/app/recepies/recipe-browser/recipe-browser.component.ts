@@ -10,7 +10,7 @@ import {IFactorioRecipe} from "../../model/i-factorio-recipe";
 export class RecipeBrowserComponent implements OnInit {
   private _storageService: StorageService;
 
-  private _recepies: IFactorioRecipe[];
+  public recepies: IFactorioRecipe[];
 
   constructor(storageService: StorageService) {
     this._storageService = storageService;
@@ -18,13 +18,11 @@ export class RecipeBrowserComponent implements OnInit {
   }
 
   ngOnInit() {
-    this._recepies = StorageService.retrieveRecepies();
-    this._storageService.recepiesChanged.subscribe((data) => {
-      this._recepies = data;
-      console.log(this._recepies);
+    this.recepies = this._storageService.recipeCache;
+    this._storageService.recipesChanged.subscribe((data) => {
+      this.recepies = data;
     });
 
-    console.log(this._recepies);
   }
 
 }

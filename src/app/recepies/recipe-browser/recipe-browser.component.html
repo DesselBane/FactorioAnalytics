@@ -1,3 +1,6 @@
-<mat-list>
-  <mat-list-item *ngFor="let recepie of _recepies">{{recepie.name}}</mat-list-item>
-</mat-list>
+<mat-nav-list>
+  <mat-list-item *ngFor="let recepie of recepies"
+                 routerLink="/recipes/details/{{recepie.name}}">
+    {{recepie.name}}
+  </mat-list-item>
+</mat-nav-list>

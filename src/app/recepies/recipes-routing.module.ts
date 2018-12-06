@@ -1,7 +1,7 @@
 import {NgModule} from '@angular/core';
 import {RouterModule} from '@angular/router';
 import {RecipeBrowserComponent} from "./recipe-browser/recipe-browser.component";
-import {RecipeDetailsComponent} from "./recipe-details/recipe-details.component";
+import {RecipeOverviewComponent} from "./recipe-overview/recipe-overview.component";
 
 @NgModule({
   imports: [RouterModule.forChild([
@@ -9,7 +9,7 @@ import {RecipeDetailsComponent} from "./recipe-details/recipe-details.component"
       path: 'recipes',
       children: [
         {path: 'browse', component: RecipeBrowserComponent},
-        {path: 'details/:id', component: RecipeDetailsComponent}
+        {path: 'details/:id', component: RecipeOverviewComponent}
       ]
     }
   ])],

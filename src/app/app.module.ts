@@ -1,5 +1,5 @@
 import {BrowserModule} from '@angular/platform-browser';
-import {NgModule} from '@angular/core';
+import {CUSTOM_ELEMENTS_SCHEMA, NgModule} from '@angular/core';
 
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
@@ -7,6 +7,7 @@ import {NoopAnimationsModule} from '@angular/platform-browser/animations';
 import {StorageModule} from "./storage/storage.module";
 import {MaterialMetaModule} from "./material-meta/material-meta.module";
 import {RecipesModule} from "./recepies/recipes.module";
+import {CalculatorModule} from "./calculator/calculator.module";
 
 @NgModule({
   declarations: [
@@ -16,14 +17,17 @@ import {RecipesModule} from "./recepies/recipes.module";
     BrowserModule,
     MaterialMetaModule,
 
+
     StorageModule,
     RecipesModule,
+    CalculatorModule,
 
     AppRoutingModule,
     NoopAnimationsModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppModule {
 }

@@ -1,3 +1,11 @@
-<p>
-  recepie-details works!
-</p>
+<mat-card>
+  <p>Name: {{CurrentRecipe?.name}}</p>
+  <p>Category: {{CurrentRecipe?.category}}</p>
+  <p>Energy: {{CurrentRecipe?.energy}}</p>
+  <p>Ingriedients:</p>
+  <mat-list>
+    <mat-list-item *ngFor="let ingriedient of CurrentRecipe?.ingredients">
+      <span>Name: {{ingriedient.name}}</span> <span>Amount: {{ingriedient.amount}}</span>
+    </mat-list-item>
+  </mat-list>
+</mat-card>

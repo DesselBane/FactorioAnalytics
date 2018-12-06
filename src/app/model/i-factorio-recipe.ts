@@ -5,7 +5,7 @@ export interface IFactorioRecipe {
   energy: number;
   name: string;
   ingredients: IFactorioItem[];
-  products: IFactorioItem[];
+  product: IFactorioItem;
 }
 
 export class FactorioRecipe implements IFactorioRecipe {
@@ -13,7 +13,7 @@ export class FactorioRecipe implements IFactorioRecipe {
   energy: number;
   ingredients: IFactorioItem[] = [];
   name: string;
-  products: IFactorioItem[] = [];
+  product: IFactorioItem;
 
   public static Parse(data: any): IFactorioRecipe {
     if (typeof data === "string")
@@ -24,13 +24,10 @@ export class FactorioRecipe implements IFactorioRecipe {
     result.category = data.category;
     result.energy = data.energy;
     result.name = data.name;
+    result.product = FactorioItem.Parse(data.products[0]);
 
     for (let ingredient of data.ingredients) {
       result.ingredients.push(FactorioItem.Parse(ingredient));
-    }
-
-    for (let product of data.products) {
-      result.products.push(FactorioItem.Parse(product))
     }
 
     return result;

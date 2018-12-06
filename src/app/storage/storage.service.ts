@@ -8,16 +8,20 @@ import {Subject} from "rxjs";
 export class StorageService {
   private static readonly storageKey = "factorio-recepie-store";
 
-  private _recepiesChanged: Subject<IFactorioRecipe[]> = new Subject();
-
-  get recepiesChanged(): Subject<IFactorioRecipe[]> {
-    return this._recepiesChanged;
+  constructor() {
+    this._recipeCache = JSON.parse(localStorage.getItem(StorageService.storageKey));
   }
 
+  private _recipesChanged: Subject<IFactorioRecipe[]> = new Subject();
 
+  get recipesChanged(): Subject<IFactorioRecipe[]> {
+    return this._recipesChanged;
+  }
 
-  constructor() {
+  private _recipeCache: IFactorioRecipe[];
 
+  get recipeCache(): IFactorioRecipe[] {
+    return this._recipeCache;
   }
 
   importFiles(files: File[]) {
@@ -29,10 +33,6 @@ export class StorageService {
       if (value.name.endsWith(".png"))
         this.importIcon(value);
     }
-  }
-
-  public static retrieveRecepies(): IFactorioRecipe[] {
-    return JSON.parse(localStorage.getItem(StorageService.storageKey));
   }
 
   private static parseRecepies(json: any): IFactorioRecipe[] {
@@ -60,8 +60,13 @@ export class StorageService {
     fileReader.readAsText(file);
   }
 
+  public getRecipeByName(recipeName: string): IFactorioRecipe {
+    return this._recipeCache.find(x => x.name == recipeName);
+  }
+
   private storeRecepies(data: IFactorioRecipe[]) {
+    this._recipeCache = data;
     localStorage.setItem(StorageService.storageKey, JSON.stringify(data));
-    this._recepiesChanged.next(data);
+    this._recipesChanged.next(data);
   }
 }

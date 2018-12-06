@@ -1,4 +1,5 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {IFactorioRecipe} from "../../model/i-factorio-recipe";
 
 @Component({
   selector: 'app-recepie-details',
@@ -7,10 +8,14 @@ import {Component, OnInit} from '@angular/core';
 })
 export class RecipeDetailsComponent implements OnInit {
 
+  @Input()
+  public CurrentRecipe: IFactorioRecipe;
+
   constructor() {
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
   }
+
 
 }

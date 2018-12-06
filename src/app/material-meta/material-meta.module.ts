@@ -19,10 +19,12 @@ import {
   MatTabsModule,
   MatToolbarModule
 } from '@angular/material';
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 
 @NgModule({
   imports: [
     CommonModule,
+    BrowserAnimationsModule,
     MatAutocompleteModule,
     MatButtonModule,
     MatCardModule,
@@ -42,6 +44,7 @@ import {
     MatTabsModule
   ],
   exports: [
+    BrowserAnimationsModule,
     MatAutocompleteModule,
     MatButtonModule,
     MatCardModule,
