@@ -47,7 +47,11 @@ export class StorageService {
   }
 
   importIcon(file: File) {
-    //TODO
+    let fileReader = new FileReader();
+    fileReader.onload = (data: any) => {
+      localStorage.setItem(file.name, 'data:image/png;base64,' + btoa(data.target.result));
+    };
+    fileReader.readAsBinaryString(file);
   }
 
   private importRecepies(file: File) {
@@ -69,4 +73,6 @@ export class StorageService {
     localStorage.setItem(StorageService.storageKey, JSON.stringify(data));
     this._recipesChanged.next(data);
   }
+
+
 }

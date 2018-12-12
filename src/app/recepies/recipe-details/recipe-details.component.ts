@@ -10,11 +10,13 @@ export class RecipeDetailsComponent implements OnInit {
 
   @Input()
   public CurrentRecipe: IFactorioRecipe;
+  public picture: string;
 
   constructor() {
   }
 
   ngOnInit(): void {
+    this.picture = localStorage.getItem(this.CurrentRecipe.name + ".png");
   }
 
 

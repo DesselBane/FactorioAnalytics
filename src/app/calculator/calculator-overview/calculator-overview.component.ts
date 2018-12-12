@@ -23,7 +23,6 @@ export class CalculatorOverviewComponent implements OnInit {
   ngOnInit() {
     this._activatedRoute.paramMap.subscribe(x => {
       this.CurrentSession = this._calculatorService.getSession(x.get('id'));
-      console.log(this.CurrentSession);
     });
   }
 
@@ -33,6 +32,5 @@ export class CalculatorOverviewComponent implements OnInit {
 
   updateSubsessions() {
     this._calculatorService.updateSubsessions(this.CurrentSession);
-    console.log(this.CurrentSession);
   }
 }

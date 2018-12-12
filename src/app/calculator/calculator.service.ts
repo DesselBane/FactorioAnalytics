@@ -38,7 +38,6 @@ export class CalculatorService {
   }
 
   private createSubsessions(currentSession: CalculatorSession) {
-    console.log("creating subsessions");
 
     for (let ingriedient of currentSession.Recipe.ingredients) {
       let recipe = this._storageService.getRecipeByName(ingriedient.name);
@@ -58,13 +57,7 @@ export class CalculatorService {
   }
 
   public getSession(sessionId: string): CalculatorSession {
-    console.log(sessionId);
-    let session = this._currentSessions.find(x => x.SessionId === sessionId);
-
-    console.log(session);
-    console.log(this._currentSessions);
-
-    return session;
+    return this._currentSessions.find(x => x.SessionId === sessionId);
   }
 
   private storeSessions() {
