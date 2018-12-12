@@ -30,4 +30,9 @@ export class CalculatorOverviewComponent implements OnInit {
   updateSession() {
     CalculatorService.update(this.CurrentSession);
   }
+
+  updateSubsessions() {
+    this._calculatorService.updateSubsessions(this.CurrentSession);
+    console.log(this.CurrentSession);
+  }
 }

@@ -17,6 +17,7 @@ export class CalculatorSession {
 
   CraftingsPerSecond: number;
   ItemsPerSecond: number;
+  NeededAssemblersCount: number;
 
   constructor(recipe: IFactorioRecipe,
               sessionId?: string) {
