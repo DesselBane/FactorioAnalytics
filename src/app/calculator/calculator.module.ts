@@ -6,6 +6,7 @@ import {RecipesModule} from "../recepies/recipes.module";
 import {CalculatorOverviewComponent} from './calculator-overview/calculator-overview.component';
 import {CalculatorDetailsComponent} from './calculator-details/calculator-details.component';
 import {FormsModule} from "@angular/forms";
+import {PipesModule} from "../pipes/pipes.module";
 
 @NgModule({
   declarations: [
@@ -17,6 +18,8 @@ import {FormsModule} from "@angular/forms";
     MaterialMetaModule,
     RecipesModule,
     FormsModule,
+    PipesModule,
+
 
 
     CalculatorRoutingModule

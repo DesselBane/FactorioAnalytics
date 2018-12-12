@@ -1,12 +1,36 @@
 <mat-card>
-  <img [src]="picture" alt="recipe icon"/>
-  <p>Name: {{CurrentRecipe?.name}}</p>
-  <p>Category: {{CurrentRecipe?.category}}</p>
-  <p>Energy: {{CurrentRecipe?.energy}}</p>
-  <p>Ingriedients:</p>
-  <mat-list>
-    <mat-list-item *ngFor="let ingriedient of CurrentRecipe?.ingredients">
-      <span>Name: {{ingriedient.name}}</span> <span>Amount: {{ingriedient.amount}}</span>
-    </mat-list-item>
-  </mat-list>
+  <div class="first-row">
+    <img [src]="getPictureByName(CurrentRecipe.name)"
+         alt="recipe icon"
+         style="vertical-align: middle; margin-right: 1em"/>
+
+    <span style="vertical-align: middle">
+      {{CurrentRecipe?.name | replaceChar: "-":" " | titlecase}}
+    </span>
+  </div>
+
+  <mat-expansion-panel class="second-row">
+    <mat-expansion-panel-header>Details</mat-expansion-panel-header>
+    <div class="recipe-detail-expansion-content">
+      <div class="first-column first-row">
+        <p>Category: {{CurrentRecipe?.category}}</p>
+        <p>Energy: {{CurrentRecipe?.energy}}</p>
+      </div>
+
+      <div class="second-column first-row">
+        <p>Ingriedients:</p>
+        <mat-list>
+          <mat-list-item *ngFor="let ingriedient of CurrentRecipe?.ingredients">
+            <span style="margin-right: .5em">{{ingriedient.amount}}x </span>
+            <img [src]="getPictureByName(ingriedient.name)"
+                 alt="ingriedient icon"
+                 style="margin-right: .5em"/>
+            <span style="margin-right: .5em">{{ingriedient.name | replaceChar: "-":" " | titlecase}}</span>
+          </mat-list-item>
+        </mat-list>
+      </div>
+    </div>
+
+  </mat-expansion-panel>
+
 </mat-card>

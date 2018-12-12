@@ -19,41 +19,48 @@ export class CalculatorService {
       this._currentSessions = [];
   }
 
-  public static update(CurrentSession: CalculatorSession) {
-    CurrentSession.CraftingsPerSecond = 1 / (CurrentSession.Recipe.energy / CurrentSession.CraftingSpeedMultiplier);
-    CurrentSession.ItemsPerSecond = CurrentSession.CraftingsPerSecond * CurrentSession.Recipe.product.amount * CurrentSession.CraftingOutputMultiplier;
-    CurrentSession.TargetCraftingsPerSecond = CurrentSession.TargetAmountPerSecond / CurrentSession.Recipe.product.amount;
-    CurrentSession.NeededAssemblersCount = CurrentSession.TargetCraftingsPerSecond / CurrentSession.CraftingsPerSecond;
-  }
-
-  public updateSubsessions(currentSession: CalculatorSession) {
-    if (currentSession.SubSessions == null || currentSession.SubSessions.length === 0)
-      this.createSubsessions(currentSession);
-
-    for (let subSession of currentSession.SubSessions) {
-      let amount = currentSession.Recipe.ingredients.find(x => x.name === subSession.Recipe.name).amount;
-      subSession.TargetAmountPerSecond = currentSession.TargetCraftingsPerSecond * amount;
-      CalculatorService.update(subSession);
-    }
-  }
-
-  private createSubsessions(currentSession: CalculatorSession) {
-
-    for (let ingriedient of currentSession.Recipe.ingredients) {
-      let recipe = this._storageService.getRecipeByName(ingriedient.name);
-      let newSession = new CalculatorSession(recipe, currentSession.SessionId);
-      currentSession.SubSessions.push(newSession);
-    }
+  public updateForTargetAmount(currentSession: CalculatorSession) {
+    this.updateForTargetAmountImpl(currentSession);
+    this.storeSessions();
   }
 
   public createSession(recipeName: string): string {
-    let recipe = this._storageService.getRecipeByName(recipeName);
-
-    let newSession = new CalculatorSession(recipe);
+    let newSession = this.createSessionImpl(recipeName);
     this._currentSessions.push(newSession);
     this.storeSessions();
 
     return newSession.SessionId;
+  }
+
+  private updateForTargetAmountImpl(currentSession: CalculatorSession) {
+    currentSession.CraftingsPerSecond = 1 / (currentSession.Recipe.energy / currentSession.CraftingSpeedMultiplier);
+    currentSession.ItemsPerSecond = currentSession.CraftingsPerSecond * currentSession.Recipe.product.amount * currentSession.CraftingOutputMultiplier;
+    currentSession.TargetCraftingsPerSecond = currentSession.TargetAmountPerSecond / currentSession.Recipe.product.amount;
+    currentSession.NeededAssemblersCount = currentSession.TargetCraftingsPerSecond / currentSession.CraftingsPerSecond;
+
+    for (let subSession of currentSession.SubSessions) {
+      let amount = currentSession.Recipe.ingredients.find(x => x.name === subSession.Recipe.name).amount;
+      subSession.TargetAmountPerSecond = currentSession.TargetCraftingsPerSecond * amount;
+      this.updateForTargetAmountImpl(subSession);
+    }
+  }
+
+  private createSessionImpl(recipeName: string, sessionId?: string): CalculatorSession {
+    let recipe = this._storageService.getRecipeByName(recipeName);
+
+    if (recipe == null)
+      return null;
+
+    let newSession = new CalculatorSession(recipe, sessionId);
+
+    for (let ingriedient of newSession.Recipe.ingredients) {
+      let subSession = this.createSessionImpl(ingriedient.name, newSession.SessionId);
+
+      if (subSession != null)
+        newSession.SubSessions.push(subSession);
+    }
+
+    return newSession;
   }
 
   public getSession(sessionId: string): CalculatorSession {
@@ -63,4 +70,5 @@ export class CalculatorService {
   private storeSessions() {
     localStorage.setItem(this._sessionsKey, JSON.stringify(this._currentSessions));
   }
+
 }

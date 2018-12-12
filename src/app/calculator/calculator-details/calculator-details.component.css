@@ -1,4 +1,25 @@
-.form-flex-columns {
-  display: flex;
-  flex-direction: column;
+form {
+  display: grid;
+  grid-template-columns: 33% 33% 33%;
+  grid-template-rows: auto auto;
+}
+
+#calc-details-exp-details {
+  grid-column: 1 / span 3;
+  border: .05em solid red;
+}
+
+#calc-details-exp-details-content {
+  display: grid;
+  grid-template-rows: auto;
+  grid-template-columns: 50% 50%;
+}
+
+#calc-details-calc-details {
+  display: grid;
+}
+
+#calc-details-recipe-details {
+  display: grid;
+  grid-template-rows: auto auto auto;
 }

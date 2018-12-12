@@ -1,46 +1,94 @@
 <mat-card>
-  <form #calcForm="ngForm" class="form-flex-columns">
-    <mat-form-field>
+  <form #calcForm="ngForm">
+
+    <div class="first-column first-row" title="recipeNameAndIcon">
+      <img [src]="getIconByName(CurrentSession.Recipe.name)"
+           alt=""
+           style="vertical-align: middle"/>
+      <span>{{CurrentSession.Recipe.name | replaceChar: '-':' ' | titlecase}}</span>
+    </div>
+
+    <mat-form-field class="second-column first-row">
       <input [(ngModel)]="CurrentSession.TargetAmountPerSecond"
              matInput
              name="input_targetAmountPerSecond"
+             (change)="targetAmountChanged()"
              placeholder="Target Amount Per Second">
     </mat-form-field>
-    <mat-form-field>
-      <input [(ngModel)]="CurrentSession.CraftingSpeedMultiplier"
-             disabled
+
+    <mat-form-field class="third-column first-row">
+      <input [(ngModel)]="CurrentSession.NeededAssemblersCount"
              matInput
-             name="input_craftingSpeedMultiplier"
-             placeholder="Crafting Speed Multiplier">
+             name="input_neededAssemblersCount"
+             placeholder="Assemblers Needed">
     </mat-form-field>
-    <mat-form-field>
-      <input [(ngModel)]="CurrentSession.CraftingOutputMultiplier"
-             disabled
-             matInput
-             name="input_craftingOutputMultiplier"
-             placeholder="Crafting Output Multiplier">
-    </mat-form-field>
-    <mat-form-field>
-      <input [(ngModel)]="CurrentSession.TargetCraftingsPerSecond"
-             disabled
-             matInput
-             name="input_targetCraftingsPerSecond"
-             placeholder="Target Craftings Per Second">
-    </mat-form-field>
-    <mat-form-field>
-      <input [(ngModel)]="CurrentSession.CraftingsPerSecond"
-             disabled
-             matInput
-             name="input_CraftingsPerSecond"
-             placeholder="Craftings Per Second">
-    </mat-form-field>
-    <mat-form-field>
-      <input [(ngModel)]="CurrentSession.ItemsPerSecond"
-             disabled
-             matInput
-             name="input_itemsPerSecond"
-             placeholder="Items Per Second">
-    </mat-form-field>
+
+    <mat-expansion-panel class="second-row" id="calc-details-exp-details">
+      <mat-expansion-panel-header>Details</mat-expansion-panel-header>
+      <div id="calc-details-exp-details-content">
+        <div class="first-row first-column" id="calc-details-recipe-details">
+          <mat-form-field class="first-row">
+            <input [(ngModel)]="CurrentSession.Recipe.category"
+                   disabled
+                   matInput
+                   name="input_recipeCategory"
+                   placeholder="Category">
+          </mat-form-field>
+          <mat-form-field class="second-row">
+            <input [(ngModel)]="CurrentSession.Recipe.energy"
+                   disabled
+                   matInput
+                   name="input_recipeEnergy"
+                   placeholder="Energy">
+          </mat-form-field>
+          <mat-list class="third-row">
+            <mat-list-item *ngFor="let ingridient of CurrentSession.Recipe.ingredients">
+              <span style="margin-right: .5em">{{ingridient.amount}}x</span>
+              <img [src]="getIconByName(ingridient.name)"
+                   alt="" style="vertical-align: middle; margin-right: .5em"/>
+              <span>{{ingridient.name | replaceChar: '-':' ' | titlecase}}</span>
+            </mat-list-item>
+          </mat-list>
+        </div>
+        <div class="first-row second-column" id="calc-details-calc-details">
+          <mat-form-field class="first-row">
+            <input [(ngModel)]="CurrentSession.CraftingSpeedMultiplier"
+                   disabled
+                   matInput
+                   name="input_craftingSpeedMultiplier"
+                   placeholder="Crafting Speed Multiplier">
+          </mat-form-field>
+          <mat-form-field class="second-row">
+            <input [(ngModel)]="CurrentSession.CraftingOutputMultiplier"
+                   disabled
+                   matInput
+                   name="input_craftingOutputMultiplier"
+                   placeholder="Crafting Output Multiplier">
+          </mat-form-field>
+          <mat-form-field class="third-row">
+            <input [(ngModel)]="CurrentSession.TargetCraftingsPerSecond"
+                   disabled
+                   matInput
+                   name="input_targetCraftingsPerSecond"
+                   placeholder="Target Craftings Per Second">
+          </mat-form-field>
+          <mat-form-field class="fourth-row">
+            <input [(ngModel)]="CurrentSession.CraftingsPerSecond"
+                   disabled
+                   matInput
+                   name="input_CraftingsPerSecond"
+                   placeholder="Craftings Per Second">
+          </mat-form-field>
+          <mat-form-field class="fifth-row">
+            <input [(ngModel)]="CurrentSession.ItemsPerSecond"
+                   disabled
+                   matInput
+                   name="input_itemsPerSecond"
+                   placeholder="Items Per Second">
+          </mat-form-field>
+        </div>
+      </div>
+    </mat-expansion-panel>
   </form>
 </mat-card>
 

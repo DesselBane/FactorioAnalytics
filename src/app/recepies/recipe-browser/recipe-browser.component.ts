@@ -5,7 +5,7 @@ import {IFactorioRecipe} from "../../model/i-factorio-recipe";
 @Component({
   selector: 'app-recepie-browser',
   templateUrl: './recipe-browser.component.html',
-  styleUrls: ['./recipe-browser.component.sass']
+  styleUrls: ['./recipe-browser.component.css']
 })
 export class RecipeBrowserComponent implements OnInit {
   private _storageService: StorageService;

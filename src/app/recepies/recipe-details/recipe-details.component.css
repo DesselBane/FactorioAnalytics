@@ -1,0 +1,9 @@
+mat-card {
+  display: grid;
+  grid-template-rows: auto auto;
+}
+
+.recipe-detail-expansion-content {
+  display: grid;
+  grid-template-columns: 50% 50%;
+}

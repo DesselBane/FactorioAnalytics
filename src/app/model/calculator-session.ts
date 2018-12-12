@@ -12,7 +12,7 @@ export class CalculatorSession {
   CraftingOutputMultiplier: number = 1;
   CraftingSpeedMultiplier: number = 1;
 
-  TargetAmountPerSecond: number;
+  TargetAmountPerSecond: number = 0;
   TargetCraftingsPerSecond: number;
 
   CraftingsPerSecond: number;

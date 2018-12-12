@@ -1,0 +1,68 @@
+/* You can add global styles to this file, and also import other style files */
+
+.first-row {
+  grid-row: 1;
+}
+
+.second-row {
+  grid-row: 2;
+}
+
+.third-row {
+  grid-row: 3;
+}
+
+.fourth-row {
+  grid-row: 4;
+}
+
+.fifth-row {
+  grid-row: 5;
+}
+
+.first-column {
+  grid-column: 1;
+}
+
+.second-column {
+  grid-column: 2;
+}
+
+.third-column {
+  grid-column: 3;
+}
+
+.fourth-column {
+  grid-column: 4;
+}
+
+.fifth-column {
+  grid-column: 5;
+}
+
+
+/*noinspection CssNoGenericFontName*/
+.material-icons {
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px; /* Preferred icon size */
+  display: inline-block;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+  white-space: nowrap;
+  direction: ltr;
+
+  /* Support for all WebKit browsers. */
+  -webkit-font-smoothing: antialiased;
+  /* Support for Safari and Chrome. */
+  text-rendering: optimizeLegibility;
+
+  /* Support for Firefox. */
+  -moz-osx-font-smoothing: grayscale;
+
+  /* Support for IE. */
+  font-feature-settings: 'liga';
+}

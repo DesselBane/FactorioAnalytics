@@ -17,7 +17,8 @@ import {
   MatSidenavModule,
   MatSnackBarModule,
   MatTabsModule,
-  MatToolbarModule
+  MatToolbarModule,
+  MatTreeModule
 } from '@angular/material';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 
@@ -41,7 +42,8 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
     MatExpansionModule,
     MatSidenavModule,
     MatToolbarModule,
-    MatTabsModule
+    MatTabsModule,
+    MatTreeModule
   ],
   exports: [
     BrowserAnimationsModule,
@@ -61,7 +63,8 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
     MatExpansionModule,
     MatSidenavModule,
     MatToolbarModule,
-    MatTabsModule
+    MatTabsModule,
+    MatTreeModule
   ]
 })
 export class MaterialMetaModule {
