@@ -25,4 +25,8 @@ export class RecipeBrowserComponent implements OnInit {
 
   }
 
+  getImageForRecipe(recipeName: string): string {
+    return localStorage.getItem(recipeName + '.png');
+  }
+
 }

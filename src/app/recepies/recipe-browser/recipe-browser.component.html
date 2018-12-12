@@ -1,6 +1,7 @@
 <mat-nav-list>
   <mat-list-item *ngFor="let recepie of recepies"
                  routerLink="/recipes/details/{{recepie.name}}">
-    {{recepie.name}}
+    <img [src]="getImageForRecipe(recepie.name)" alt="recipe icon"/>
+    <span>{{recepie.name | replaceChar: "-":" " | titlecase}}</span>
   </mat-list-item>
 </mat-nav-list>
