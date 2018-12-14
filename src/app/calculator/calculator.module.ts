@@ -7,11 +7,13 @@ import {CalculatorOverviewComponent} from './calculator-overview/calculator-over
 import {CalculatorDetailsComponent} from './calculator-details/calculator-details.component';
 import {FormsModule} from "@angular/forms";
 import {PipesModule} from "../pipes/pipes.module";
+import {CalculatorHistoryComponent} from './calculator-history/calculator-history.component';
 
 @NgModule({
   declarations: [
     CalculatorOverviewComponent,
-    CalculatorDetailsComponent
+    CalculatorDetailsComponent,
+    CalculatorHistoryComponent
   ],
   imports: [
     CommonModule,

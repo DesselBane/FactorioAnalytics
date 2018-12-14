@@ -32,6 +32,6 @@ export class RecipeOverviewComponent implements OnInit {
 
   createCalculatorSession() {
     let sessionId = this._calculatorService.createSession(this._currentRecipe.name);
-    this._router.navigateByUrl("calculator/" + sessionId);
+    this._router.navigateByUrl("calculator/session/" + sessionId);
   }
 }

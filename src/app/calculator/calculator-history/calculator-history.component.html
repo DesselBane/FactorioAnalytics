@@ -1,0 +1,35 @@
+<form>
+  <mat-card *ngFor="let session of CurrentSessions">
+
+    <img [src]="getIconByName(session.Recipe.name)"
+         alt=""
+         class="first-column first-row"/>
+
+    <mat-form-field class="second-column first-row">
+      <input disabled
+             matInput
+             placeholder="Recipe"
+             value="{{session.Recipe.name | replaceChar: '-':' ' | titlecase}}"/>
+    </mat-form-field>
+
+    <mat-form-field class="second-column second-row">
+      <input disabled
+             matInput
+             placeholder="SessionId"
+             value="{{session.SessionId}}">
+    </mat-form-field>
+
+    <mat-form-field class="second-column third-row">
+      <input disabled
+             matInput
+             placeholder="Target Amount"
+             value="{{session.TargetAmountPerSecond}}"/>
+    </mat-form-field>
+
+    <button (click)="btn_deleteSession(session)"
+            class="third-column first-row"
+            mat-icon-button>
+      <mat-icon>delete</mat-icon>
+    </button>
+  </mat-card>
+</form>

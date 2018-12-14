@@ -67,6 +67,16 @@ export class CalculatorService {
     return this._currentSessions.find(x => x.SessionId === sessionId);
   }
 
+  public getAllSessions(): CalculatorSession[] {
+    return this._currentSessions;
+  }
+
+  public removeSession(sessionId: string) {
+    let session = this._currentSessions.find(x => x.SessionId === sessionId);
+    this._currentSessions.splice(this._currentSessions.indexOf(session), 1);
+    this.storeSessions();
+  }
+
   private storeSessions() {
     localStorage.setItem(this._sessionsKey, JSON.stringify(this._currentSessions));
   }

@@ -1,0 +1,6 @@
+
+mat-card {
+  margin: .2em;
+  display: grid;
+  grid-template-columns: min-content auto min-content;
+}

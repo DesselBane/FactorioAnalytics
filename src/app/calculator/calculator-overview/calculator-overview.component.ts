@@ -17,7 +17,7 @@ export class CalculatorOverviewComponent implements OnInit {
   private _calculatorService: CalculatorService;
   public nestedTreeControl: NestedTreeControl<CalculatorSession>;
   public nestedDataSource: MatTreeNestedDataSource<any>;
-  private _rootSession: CalculatorSession;
+  public RootSession: CalculatorSession;
 
 
   constructor(activatedRoute: ActivatedRoute,
@@ -33,8 +33,8 @@ export class CalculatorOverviewComponent implements OnInit {
 
   ngOnInit() {
     this._activatedRoute.paramMap.subscribe(x => {
-      this._rootSession = this._calculatorService.getSession(x.get('id'));
-      this.nestedDataSource.data = [this._rootSession];
+      this.RootSession = this._calculatorService.getSession(x.get('id'));
+      this.nestedDataSource.data = [this.RootSession];
       console.log(this.nestedDataSource.data);
     });
   }
