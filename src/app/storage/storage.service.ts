@@ -15,6 +15,7 @@ export class StorageService {
 
   constructor() {
     this._recipeCache = JSON.parse(localStorage.getItem(StorageService.recipeStorageKey));
+    this._craftingMachineCache = JSON.parse(localStorage.getItem(StorageService.craftingMachinesStorageKey));
   }
 
   private _recipesChanged: Subject<FactorioRecipe[]> = new Subject();
@@ -108,7 +109,6 @@ export class StorageService {
     localStorage.setItem(StorageService.craftingMachinesStorageKey, JSON.stringify(data));
     this._craftingMachinesChanged.next(data);
   }
-
 
   public static getIconByName(name: string): string {
     let icon = localStorage.getItem(name + '.png');

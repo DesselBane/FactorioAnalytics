@@ -1,7 +1,11 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {CalculatorSession} from "../../model/calculator-session";
 import {CalculatorService} from "../calculator.service";
 import {StorageService} from "../../storage/storage.service";
+import {FactorioRecipe} from "../../model/factorio-recipe";
+import {FactorioCraftingMachine} from "../../model/factorio-crafting-machine";
+import {MatListOption, MatSelectionList, MatSelectionListChange} from "@angular/material";
+import {SelectionModel} from "@angular/cdk/collections";
 
 @Component({
   selector: 'app-calculator-details',
@@ -10,10 +14,14 @@ import {StorageService} from "../../storage/storage.service";
 })
 export class CalculatorDetailsComponent implements OnInit {
 
+  public CraftingMachines: FactorioCraftingMachine[];
+
   @Input()
   public CurrentSession: CalculatorSession;
   private _calcService: CalculatorService;
   private _storageService: StorageService;
+  @ViewChild(MatSelectionList)
+  private _selectionList: MatSelectionList;
 
   constructor(calcService: CalculatorService,
               storageService: StorageService) {
@@ -22,6 +30,8 @@ export class CalculatorDetailsComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.CraftingMachines = this._storageService.craftingMachineCache;
+    this._selectionList.selectedOptions = new SelectionModel<MatListOption>(false);
   }
 
   public getIconByName(name: string): string {
@@ -30,5 +40,14 @@ export class CalculatorDetailsComponent implements OnInit {
 
   targetAmountChanged() {
     this._calcService.updateForTargetAmount(this.CurrentSession);
+  }
+
+  public recipeCanBeCraftedInMachine(recipe: FactorioRecipe, craftingMachine: FactorioCraftingMachine): boolean {
+    return CalculatorService.recipeCanBeCraftedInMachine(recipe, craftingMachine);
+  }
+
+  onCraftingMachineSelectionChanged($event: MatSelectionListChange) {
+    this._calcService.updateCraftingMachine(this.CurrentSession, $event.option.value);
+
   }
 }

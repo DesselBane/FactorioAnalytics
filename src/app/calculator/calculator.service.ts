@@ -1,6 +1,8 @@
 import {Injectable} from '@angular/core';
 import {CalculatorSession} from "../model/calculator-session";
 import {StorageService} from "../storage/storage.service";
+import {FactorioRecipe} from "../model/factorio-recipe";
+import {FactorioCraftingMachine} from "../model/factorio-crafting-machine";
 
 @Injectable({
   providedIn: 'root'
@@ -79,6 +81,20 @@ export class CalculatorService {
 
   private storeSessions() {
     localStorage.setItem(this._sessionsKey, JSON.stringify(this._currentSessions));
+  }
+
+  public static recipeCanBeCraftedInMachine(recipe: FactorioRecipe, craftingMachine: FactorioCraftingMachine): boolean {
+    return craftingMachine.craftingCategories.includes(recipe.category) && craftingMachine.ingredientCount >= recipe.ingredients.length;
+  }
+
+  public updateCraftingMachine(currentSession: CalculatorSession, craftingMachine: FactorioCraftingMachine) {
+    if (!CalculatorService.recipeCanBeCraftedInMachine(currentSession.Recipe, craftingMachine))
+      throw "Recipe cant be crafted in this machine";
+
+    currentSession.CraftingMachine = craftingMachine;
+    currentSession.CraftingSpeedMultiplier = craftingMachine.craftingSpeed;
+
+    this.storeSessions();
   }
 
 }

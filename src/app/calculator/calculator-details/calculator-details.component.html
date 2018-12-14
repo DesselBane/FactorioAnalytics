@@ -30,20 +30,32 @@
       <div id="calc-details-exp-details-content">
         <div class="first-row first-column" id="calc-details-recipe-details">
           <mat-form-field class="first-row">
-            <input [(ngModel)]="CurrentSession.Recipe.category"
-                   disabled
-                   matInput
-                   name="input_recipeCategory"
-                   placeholder="Category">
-          </mat-form-field>
-          <mat-form-field class="second-row">
             <input [(ngModel)]="CurrentSession.Recipe.energy"
                    disabled
                    matInput
                    name="input_recipeEnergy"
                    placeholder="Energy">
           </mat-form-field>
-          <mat-list class="third-row">
+          <mat-selection-list (selectionChange)="onCraftingMachineSelectionChanged($event)"
+                              class="second-row"
+                              dense>
+            <h3>Craftable in:</h3>
+            <div *ngFor="let craftingMachine of CraftingMachines">
+              <mat-list-option *ngIf="recipeCanBeCraftedInMachine(CurrentSession.Recipe,craftingMachine)"
+                               [selected]="craftingMachine.name === CurrentSession?.CraftingMachine?.name"
+                               [value]="craftingMachine">
+                <span>
+                  <img [src]="getIconByName(craftingMachine.name)"
+                       alt=""
+                       height="32"
+                       width="32"/>
+                  {{craftingMachine.name | replaceChar: '-':' ' | titlecase}}
+                </span>
+              </mat-list-option>
+            </div>
+          </mat-selection-list>
+          <mat-list class="third-row" dense>
+            <h3>Ingredients:</h3>
             <mat-list-item *ngFor="let ingridient of CurrentSession.Recipe.ingredients">
               <span style="margin-right: .5em">{{ingridient.amount}}x</span>
               <img [src]="getIconByName(ingridient.name)"
