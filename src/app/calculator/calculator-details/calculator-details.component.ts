@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {CalculatorSession} from "../../model/calculator-session";
 import {CalculatorService} from "../calculator.service";
+import {StorageService} from "../../storage/storage.service";
 
 @Component({
   selector: 'app-calculator-details',
@@ -12,16 +13,19 @@ export class CalculatorDetailsComponent implements OnInit {
   @Input()
   public CurrentSession: CalculatorSession;
   private _calcService: CalculatorService;
+  private _storageService: StorageService;
 
-  constructor(calcService: CalculatorService) {
+  constructor(calcService: CalculatorService,
+              storageService: StorageService) {
     this._calcService = calcService;
+    this._storageService = storageService;
   }
 
   ngOnInit() {
   }
 
   public getIconByName(name: string): string {
-    return localStorage.getItem(name + '.png');
+    return StorageService.getIconByName(name);
   }
 
   targetAmountChanged() {

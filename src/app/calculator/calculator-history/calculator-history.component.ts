@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {CalculatorService} from "../calculator.service";
 import {CalculatorSession} from "../../model/calculator-session";
 import {of} from "rxjs";
+import {StorageService} from "../../storage/storage.service";
 
 @Component({
   selector: 'app-calculator-history',
@@ -11,9 +12,12 @@ import {of} from "rxjs";
 export class CalculatorHistoryComponent implements OnInit {
   public CurrentSessions: CalculatorSession[] = [];
   private _calcService: CalculatorService;
+  private _storageService: StorageService;
 
-  constructor(calcService: CalculatorService) {
+  constructor(calcService: CalculatorService,
+              storageService: StorageService) {
     this._calcService = calcService;
+    this._storageService = storageService;
   }
 
   ngOnInit() {
@@ -25,6 +29,6 @@ export class CalculatorHistoryComponent implements OnInit {
   }
 
   public getIconByName(name: string): string {
-    return localStorage.getItem(name + '.png');
+    return StorageService.getIconByName(name);
   }
 }

@@ -1,7 +1,10 @@
 <mat-nav-list>
   <mat-list-item *ngFor="let recepie of recepies"
                  routerLink="/recipes/details/{{recepie.name}}">
-    <img [src]="getImageForRecipe(recepie.name)" alt="recipe icon"/>
+    <img [src]="getImageForRecipe(recepie.name)"
+         alt=""
+         height="32"
+         width="32"/>
     <span>{{recepie.name | replaceChar: "-":" " | titlecase}}</span>
   </mat-list-item>
 </mat-nav-list>

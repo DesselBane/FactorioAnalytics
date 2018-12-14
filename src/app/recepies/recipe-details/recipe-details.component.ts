@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {FactorioRecipe} from "../../model/factorio-recipe";
+import {StorageService} from "../../storage/storage.service";
 
 @Component({
   selector: 'app-recepie-details',
@@ -10,8 +11,10 @@ export class RecipeDetailsComponent implements OnInit {
 
   @Input()
   public CurrentRecipe: FactorioRecipe;
+  private _storageService: StorageService;
 
-  constructor() {
+  constructor(storageService: StorageService) {
+    this._storageService = storageService;
   }
 
   ngOnInit(): void {
@@ -19,7 +22,7 @@ export class RecipeDetailsComponent implements OnInit {
   }
 
   public getPictureByName(name: string): string {
-    return localStorage.getItem(name + ".png");
+    return StorageService.getIconByName(name);
   }
 
 }

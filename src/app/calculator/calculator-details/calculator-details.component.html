@@ -4,6 +4,8 @@
     <div class="first-column first-row" title="recipeNameAndIcon">
       <img [src]="getIconByName(CurrentSession.Recipe.name)"
            alt=""
+           height="32"
+           width="32"
            style="vertical-align: middle"/>
       <span>{{CurrentSession.Recipe.name | replaceChar: '-':' ' | titlecase}}</span>
     </div>
@@ -45,6 +47,8 @@
             <mat-list-item *ngFor="let ingridient of CurrentSession.Recipe.ingredients">
               <span style="margin-right: .5em">{{ingridient.amount}}x</span>
               <img [src]="getIconByName(ingridient.name)"
+                   height="32"
+                   width="32"
                    alt="" style="vertical-align: middle; margin-right: .5em"/>
               <span>{{ingridient.name | replaceChar: '-':' ' | titlecase}}</span>
             </mat-list-item>
