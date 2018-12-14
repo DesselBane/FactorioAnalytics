@@ -7970,7 +7970,8 @@
       "crafting_speed": 1,
       "crafting_categories": {
         "smelting": true
-      }
+      },
+      "module_inventory_size": 0
     },
     "steel-furnace": {
       "name": "steel-furnace",
@@ -7982,7 +7983,8 @@
       "crafting_speed": 2,
       "crafting_categories": {
         "smelting": true
-      }
+      },
+      "module_inventory_size": 0
     },
     "electric-furnace": {
       "name": "electric-furnace",
@@ -7993,7 +7995,8 @@
       "crafting_speed": 2,
       "crafting_categories": {
         "smelting": true
-      }
+      },
+      "module_inventory_size": 2
     },
     "assembling-machine-1": {
       "name": "assembling-machine-1",
@@ -8004,7 +8007,8 @@
       "crafting_speed": 0.5,
       "crafting_categories": {
         "crafting": true
-      }
+      },
+      "module_inventory_size": 0
     },
     "assembling-machine-2": {
       "name": "assembling-machine-2",
@@ -8017,7 +8021,8 @@
         "crafting": true,
         "advanced-crafting": true,
         "crafting-with-fluid": true
-      }
+      },
+      "module_inventory_size": 2
     },
     "assembling-machine-3": {
       "name": "assembling-machine-3",
@@ -8030,7 +8035,8 @@
         "crafting": true,
         "advanced-crafting": true,
         "crafting-with-fluid": true
-      }
+      },
+      "module_inventory_size": 4
     },
     "oil-refinery": {
       "name": "oil-refinery",
@@ -8041,7 +8047,8 @@
       "crafting_speed": 1,
       "crafting_categories": {
         "oil-processing": true
-      }
+      },
+      "module_inventory_size": 3
     },
     "chemical-plant": {
       "name": "chemical-plant",
@@ -8052,7 +8059,8 @@
       "crafting_speed": 1.25,
       "crafting_categories": {
         "chemistry": true
-      }
+      },
+      "module_inventory_size": 3
     },
     "centrifuge": {
       "name": "centrifuge",
@@ -8063,7 +8071,8 @@
       "crafting_speed": 0.75,
       "crafting_categories": {
         "centrifuging": true
-      }
+      },
+      "module_inventory_size": 2
     }
   },
   "mining_drill": {
@@ -8787,55 +8796,136 @@
       "name": "speed-module",
       "localised_name": "item-name.speed-module",
       "order": "a[speed]-a[speed-module-1]",
-      "fuel_value": 0
+      "fuel_value": 0,
+      "module_effects": {
+        "consumption": {
+          "bonus": 0.5
+        },
+        "speed": {
+          "bonus": 0.20000000298023
+        }
+      }
     },
     "speed-module-2": {
       "name": "speed-module-2",
       "localised_name": "item-name.speed-module-2",
       "order": "a[speed]-b[speed-module-2]",
-      "fuel_value": 0
+      "fuel_value": 0,
+      "module_effects": {
+        "consumption": {
+          "bonus": 0.60000002384186
+        },
+        "speed": {
+          "bonus": 0.30000001192093
+        }
+      }
     },
     "speed-module-3": {
       "name": "speed-module-3",
       "localised_name": "item-name.speed-module-3",
       "order": "a[speed]-c[speed-module-3]",
-      "fuel_value": 0
+      "fuel_value": 0,
+      "module_effects": {
+        "consumption": {
+          "bonus": 0.69999998807907
+        },
+        "speed": {
+          "bonus": 0.5
+        }
+      }
     },
     "effectivity-module": {
       "name": "effectivity-module",
       "localised_name": "item-name.effectivity-module",
       "order": "c[effectivity]-a[effectivity-module-1]",
-      "fuel_value": 0
+      "fuel_value": 0,
+      "module_effects": {
+        "consumption": {
+          "bonus": -0.30000001192093
+        }
+      }
     },
     "effectivity-module-2": {
       "name": "effectivity-module-2",
       "localised_name": "item-name.effectivity-module-2",
       "order": "c[effectivity]-b[effectivity-module-2]",
-      "fuel_value": 0
+      "fuel_value": 0,
+      "module_effects": {
+        "consumption": {
+          "bonus": -0.40000000596046
+        }
+      }
     },
     "effectivity-module-3": {
       "name": "effectivity-module-3",
       "localised_name": "item-name.effectivity-module-3",
       "order": "c[effectivity]-c[effectivity-module-3]",
-      "fuel_value": 0
+      "fuel_value": 0,
+      "module_effects": {
+        "consumption": {
+          "bonus": -0.5
+        }
+      }
     },
     "productivity-module": {
       "name": "productivity-module",
       "localised_name": "item-name.productivity-module",
       "order": "c[productivity]-a[productivity-module-1]",
-      "fuel_value": 0
+      "fuel_value": 0,
+      "module_effects": {
+        "consumption": {
+          "bonus": 0.40000000596046
+        },
+        "speed": {
+          "bonus": -0.15000000596046
+        },
+        "productivity": {
+          "bonus": 0.03999999910593
+        },
+        "pollution": {
+          "bonus": 0.050000000745058
+        }
+      }
     },
     "productivity-module-2": {
       "name": "productivity-module-2",
       "localised_name": "item-name.productivity-module-2",
       "order": "c[productivity]-b[productivity-module-2]",
-      "fuel_value": 0
+      "fuel_value": 0,
+      "module_effects": {
+        "consumption": {
+          "bonus": 0.60000002384186
+        },
+        "speed": {
+          "bonus": -0.15000000596046
+        },
+        "productivity": {
+          "bonus": 0.059999998658895
+        },
+        "pollution": {
+          "bonus": 0.070000000298023
+        }
+      }
     },
     "productivity-module-3": {
       "name": "productivity-module-3",
       "localised_name": "item-name.productivity-module-3",
       "order": "c[productivity]-c[productivity-module-3]",
-      "fuel_value": 0
+      "fuel_value": 0,
+      "module_effects": {
+        "consumption": {
+          "bonus": 0.80000001192093
+        },
+        "speed": {
+          "bonus": -0.15000000596046
+        },
+        "productivity": {
+          "bonus": 0.10000000149012
+        },
+        "pollution": {
+          "bonus": 0.10000000149012
+        }
+      }
     },
     "raw-wood": {
       "name": "raw-wood",
