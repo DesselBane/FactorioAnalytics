@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, ParamMap, Router} from "@angular/router";
-import {IFactorioRecipe} from "../../model/i-factorio-recipe";
+import {FactorioRecipe} from "../../model/factorio-recipe";
 import {StorageService} from "../../storage/storage.service";
 import {CalculatorService} from "../../calculator/calculator.service";
 
@@ -10,7 +10,7 @@ import {CalculatorService} from "../../calculator/calculator.service";
   styleUrls: ['./recipe-overview.component.sass']
 })
 export class RecipeOverviewComponent implements OnInit {
-  public _currentRecipe: IFactorioRecipe;
+  public _currentRecipe: FactorioRecipe;
   private _activatedRoute: ActivatedRoute;
   private _storageService: StorageService;
   private _calculatorService: CalculatorService;

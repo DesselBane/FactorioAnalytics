@@ -1,11 +1,11 @@
-import {IFactorioRecipe} from "./i-factorio-recipe";
+import {FactorioRecipe} from "./factorio-recipe";
 import {UUID} from "angular2-uuid";
 
 export class CalculatorSession {
 
   public SessionId: string;
 
-  public Recipe: IFactorioRecipe;
+  public Recipe: FactorioRecipe;
 
   SubSessions: CalculatorSession[] = [];
 
@@ -19,7 +19,7 @@ export class CalculatorSession {
   ItemsPerSecond: number;
   NeededAssemblersCount: number;
 
-  constructor(recipe: IFactorioRecipe,
+  constructor(recipe: FactorioRecipe,
               sessionId?: string) {
     this.Recipe = recipe;
     this.SessionId = sessionId;

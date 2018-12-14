@@ -1,14 +1,9 @@
-export interface IFactorioItem {
-  amount: number;
-  name: string;
-}
-
-export class FactorioItem implements IFactorioItem {
+export class FactorioItem {
   amount: number;
   name: string;
 
 
-  public static Parse(data: any): IFactorioItem {
+  public static Parse(data: any): FactorioItem {
     if (typeof data === "string")
       data = JSON.parse(data);
 

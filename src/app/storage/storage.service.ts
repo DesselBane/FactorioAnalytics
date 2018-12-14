@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {FactorioRecipe, IFactorioRecipe} from "../model/i-factorio-recipe";
+import {FactorioRecipe} from "../model/factorio-recipe";
 import {Subject} from "rxjs";
 
 @Injectable({
@@ -12,15 +12,15 @@ export class StorageService {
     this._recipeCache = JSON.parse(localStorage.getItem(StorageService.storageKey));
   }
 
-  private _recipesChanged: Subject<IFactorioRecipe[]> = new Subject();
+  private _recipesChanged: Subject<FactorioRecipe[]> = new Subject();
 
-  get recipesChanged(): Subject<IFactorioRecipe[]> {
+  get recipesChanged(): Subject<FactorioRecipe[]> {
     return this._recipesChanged;
   }
 
-  private _recipeCache: IFactorioRecipe[];
+  private _recipeCache: FactorioRecipe[];
 
-  get recipeCache(): IFactorioRecipe[] {
+  get recipeCache(): FactorioRecipe[] {
     return this._recipeCache;
   }
 
@@ -35,7 +35,7 @@ export class StorageService {
     }
   }
 
-  private static parseRecepies(json: any): IFactorioRecipe[] {
+  private static parseRecepies(json: any): FactorioRecipe[] {
     let result = [];
 
     for (let recepie of Object.values(json)) {
@@ -64,11 +64,11 @@ export class StorageService {
     fileReader.readAsText(file);
   }
 
-  public getRecipeByName(recipeName: string): IFactorioRecipe {
+  public getRecipeByName(recipeName: string): FactorioRecipe {
     return this._recipeCache.find(x => x.name == recipeName);
   }
 
-  private storeRecepies(data: IFactorioRecipe[]) {
+  private storeRecepies(data: FactorioRecipe[]) {
     this._recipeCache = data;
     localStorage.setItem(StorageService.storageKey, JSON.stringify(data));
     this._recipesChanged.next(data);

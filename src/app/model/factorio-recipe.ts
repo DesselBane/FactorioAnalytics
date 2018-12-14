@@ -1,21 +1,14 @@
-import {FactorioItem, IFactorioItem} from "./i-factorio-item";
+import {FactorioItem} from "./i-factorio-item";
 
-export interface IFactorioRecipe {
+
+export class FactorioRecipe {
   category: string;
   energy: number;
+  ingredients: FactorioItem[] = [];
   name: string;
-  ingredients: IFactorioItem[];
-  product: IFactorioItem;
-}
+  product: FactorioItem;
 
-export class FactorioRecipe implements IFactorioRecipe {
-  category: string;
-  energy: number;
-  ingredients: IFactorioItem[] = [];
-  name: string;
-  product: IFactorioItem;
-
-  public static Parse(data: any): IFactorioRecipe {
+  public static Parse(data: any): FactorioRecipe {
     if (typeof data === "string")
       data = JSON.parse(data);
 

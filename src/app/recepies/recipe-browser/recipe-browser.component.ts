@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {StorageService} from "../../storage/storage.service";
-import {IFactorioRecipe} from "../../model/i-factorio-recipe";
+import {FactorioRecipe} from "../../model/factorio-recipe";
 
 @Component({
   selector: 'app-recepie-browser',
@@ -10,7 +10,7 @@ import {IFactorioRecipe} from "../../model/i-factorio-recipe";
 export class RecipeBrowserComponent implements OnInit {
   private _storageService: StorageService;
 
-  public recepies: IFactorioRecipe[];
+  public recepies: FactorioRecipe[];
 
   constructor(storageService: StorageService) {
     this._storageService = storageService;
