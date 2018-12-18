@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {StorageService} from "../../storage/storage.service";
 import {FactorioRecipe} from "../../model/factorio-recipe";
+import {Subject} from "rxjs";
+import {debounceTime, map} from "rxjs/operators";
 
 @Component({
   selector: 'app-recepie-browser',
@@ -11,6 +13,8 @@ export class RecipeBrowserComponent implements OnInit {
   private _storageService: StorageService;
 
   public recepies: FactorioRecipe[];
+  private _recipesSubject = new Subject<string>();
+  private _recipeData: FactorioRecipe[];
 
   constructor(storageService: StorageService) {
     this._storageService = storageService;
@@ -18,9 +22,21 @@ export class RecipeBrowserComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.recepies = this._storageService.recipeCache;
+    this._recipeData = this._storageService.recipeCache;
+    this.recepies = this._recipeData;
+    this._recipesSubject.asObservable()
+      .pipe(
+        debounceTime(500),
+        map(value => this._recipeData.filter(recipe => {
+          if (value == "")
+            return true;
+          else
+            return recipe.name.includes(value);
+        }))
+      ).subscribe(filteredData => this.recepies = filteredData);
+
     this._storageService.recipesChanged.subscribe((data) => {
-      this.recepies = data;
+      this._recipeData = data;
     });
 
   }
@@ -29,4 +45,7 @@ export class RecipeBrowserComponent implements OnInit {
     return StorageService.getIconByName(recipeName);
   }
 
+  onSearchKeyUp(value: string) {
+    this._recipesSubject.next(value);
+  }
 }
