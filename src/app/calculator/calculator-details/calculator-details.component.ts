@@ -23,6 +23,22 @@ export class CalculatorDetailsComponent implements OnInit {
   @ViewChild(MatSelectionList)
   private _selectionList: MatSelectionList;
 
+  public limitationsData = [
+    {
+      name: 'Transport Belt',
+      value: 13.3
+    },
+    {
+      name: 'Fast Transport Belt',
+      value: 26.7
+    },
+    {
+      name: 'Express Transport Belt',
+      value: 40
+    }
+  ];
+
+
   constructor(calcService: CalculatorService,
               storageService: StorageService) {
     this._calcService = calcService;
@@ -50,4 +66,9 @@ export class CalculatorDetailsComponent implements OnInit {
     this._calcService.updateCraftingMachine(this.CurrentSession, $event.option.value);
     this._calcService.updateForTargetAmount(this.CurrentSession);
   }
+
+  btn_add_limitation() {
+    console.log("adding limitations");
+  }
 }
+
