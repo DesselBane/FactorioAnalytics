@@ -23,3 +23,7 @@ form {
   display: grid;
   grid-template-rows: auto auto auto;
 }
+
+mat-form-field {
+  margin: .5em;
+}

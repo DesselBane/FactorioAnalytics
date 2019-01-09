@@ -19,7 +19,7 @@
              placeholder="Target Amount Per Second">
       <mat-autocomplete #limitations="matAutocomplete">
         <mat-option *ngFor="let limit of limitationsData" [value]="limit.value">
-          {{limit.name}}
+          {{limit.value | number:'2.2-2'}} - {{limit.name}}
         </mat-option>
       </mat-autocomplete>
       <button (click)="btn_add_limitation()"
@@ -27,7 +27,7 @@
               mat-icon-button
               matSuffix
               matTooltip="Add limitation">
-        <mat-icon>add</mat-icon>
+        <mat-icon>expand_more</mat-icon>
       </button>
     </mat-form-field>
 
