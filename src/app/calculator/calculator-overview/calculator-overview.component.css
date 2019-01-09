@@ -5,3 +5,7 @@
 app-calculator-details {
   width: 100%;
 }
+
+.mat-tree-node {
+  align-items: normal;
+}
