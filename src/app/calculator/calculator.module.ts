@@ -8,12 +8,14 @@ import {CalculatorDetailsComponent} from './calculator-details/calculator-detail
 import {FormsModule} from "@angular/forms";
 import {PipesModule} from "../pipes/pipes.module";
 import {CalculatorHistoryComponent} from './calculator-history/calculator-history.component';
+import {AddModuleDialogComponent} from './calculator-details/add-module-dialog/add-module-dialog.component';
 
 @NgModule({
   declarations: [
     CalculatorOverviewComponent,
     CalculatorDetailsComponent,
-    CalculatorHistoryComponent
+    CalculatorHistoryComponent,
+    AddModuleDialogComponent
   ],
   imports: [
     CommonModule,
@@ -25,6 +27,9 @@ import {CalculatorHistoryComponent} from './calculator-history/calculator-histor
 
 
     CalculatorRoutingModule
+  ],
+  entryComponents: [
+    AddModuleDialogComponent
   ]
 })
 export class CalculatorModule {

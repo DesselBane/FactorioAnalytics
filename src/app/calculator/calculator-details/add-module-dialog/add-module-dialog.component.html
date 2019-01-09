@@ -1,0 +1,16 @@
+<div>
+  <mat-nav-list>
+    <mat-list-item (click)="acceptModule(module)"
+                   *ngFor="let module of _data">
+      <img [src]="getIconByName(module.name)"
+           alt=""
+           height="32"
+           width="32"/>
+      {{module.name | replaceChar: '-':' ' | titlecase}}
+    </mat-list-item>
+  </mat-nav-list>
+  <button (click)="cancel()"
+          mat-button>
+    Cancel
+  </button>
+</div>

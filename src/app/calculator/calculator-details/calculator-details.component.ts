@@ -4,8 +4,10 @@ import {CalculatorService} from "../calculator.service";
 import {StorageService} from "../../storage/storage.service";
 import {FactorioRecipe} from "../../model/factorio-recipe";
 import {FactorioCraftingMachine} from "../../model/factorio-crafting-machine";
-import {MatListOption, MatSelectionList, MatSelectionListChange} from "@angular/material";
+import {MatDialog, MatListOption, MatSelectionList, MatSelectionListChange} from "@angular/material";
 import {SelectionModel} from "@angular/cdk/collections";
+import {FactorioModule} from "../../model/factorio-module";
+import {AddModuleDialogComponent} from "./add-module-dialog/add-module-dialog.component";
 
 @Component({
   selector: 'app-calculator-details',
@@ -15,6 +17,7 @@ import {SelectionModel} from "@angular/cdk/collections";
 export class CalculatorDetailsComponent implements OnInit {
 
   public CraftingMachines: FactorioCraftingMachine[];
+  public Modules: FactorioModule[];
 
   @Input()
   public CurrentSession: CalculatorSession;
@@ -23,6 +26,7 @@ export class CalculatorDetailsComponent implements OnInit {
   @ViewChild(MatSelectionList)
   private _selectionList: MatSelectionList;
 
+  //TODO get limitations from some store
   public limitationsData = [
     {
       name: 'Transport Belt',
@@ -37,17 +41,21 @@ export class CalculatorDetailsComponent implements OnInit {
       value: 40
     }
   ];
+  private _addModuleDialog: MatDialog;
 
 
   constructor(calcService: CalculatorService,
-              storageService: StorageService) {
+              storageService: StorageService,
+              addModuleDialog: MatDialog) {
     this._calcService = calcService;
     this._storageService = storageService;
+    this._addModuleDialog = addModuleDialog;
   }
 
   ngOnInit() {
     this.CraftingMachines = this._storageService.craftingMachineCache;
     this._selectionList.selectedOptions = new SelectionModel<MatListOption>(false);
+    this.Modules = this._storageService.modulesCache;
   }
 
   public getIconByName(name: string): string {
@@ -70,5 +78,27 @@ export class CalculatorDetailsComponent implements OnInit {
   btn_add_limitation() {
     console.log("adding limitations");
   }
+
+  on_btn_add_module_click() {
+    this.openAddModuleDialog();
+  }
+
+  on_btn_remove_module_click(module: FactorioModule) {
+    this._calcService.removeModule(this.CurrentSession, module);
+  }
+
+  private openAddModuleDialog() {
+    const dialogRef = this._addModuleDialog.open(AddModuleDialogComponent, {
+      data: this.Modules
+    });
+
+    dialogRef.afterClosed()
+      .subscribe(result => {
+        if (result != null)
+          this._calcService.addModuleToSession(this.CurrentSession, result);
+      })
+  }
+
+
 }
 

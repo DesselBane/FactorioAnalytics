@@ -3,6 +3,7 @@ import {CalculatorSession} from "../model/calculator-session";
 import {StorageService} from "../storage/storage.service";
 import {FactorioRecipe} from "../model/factorio-recipe";
 import {FactorioCraftingMachine} from "../model/factorio-crafting-machine";
+import {FactorioModule} from "../model/factorio-module";
 
 @Injectable({
   providedIn: 'root'
@@ -34,17 +35,25 @@ export class CalculatorService {
     return newSession.SessionId;
   }
 
-  private updateForTargetAmountImpl(currentSession: CalculatorSession) {
-    currentSession.CraftingsPerSecond = 1 / (currentSession.Recipe.energy / currentSession.CraftingSpeedMultiplier);
-    currentSession.ItemsPerSecond = currentSession.CraftingsPerSecond * currentSession.Recipe.product.amount * currentSession.CraftingOutputMultiplier;
-    currentSession.TargetCraftingsPerSecond = currentSession.TargetAmountPerSecond / currentSession.Recipe.product.amount;
-    currentSession.NeededAssemblersCount = currentSession.TargetCraftingsPerSecond / currentSession.CraftingsPerSecond;
+  private static updateMulitplier(currentSession: CalculatorSession) {
+    let speedMultiplier = currentSession.CraftingMachine.craftingSpeed;
+    let outputMultiplier = 1;
 
-    for (let subSession of currentSession.SubSessions) {
-      let amount = currentSession.Recipe.ingredients.find(x => x.name === subSession.Recipe.name).amount;
-      subSession.TargetAmountPerSecond = currentSession.TargetCraftingsPerSecond * amount;
-      this.updateForTargetAmountImpl(subSession);
+    for (let module of currentSession.Modules) {
+      for (let effect of module.moduleEffects) {
+        switch (effect[0]) {
+          case "speed":
+            speedMultiplier += effect[1];
+            break;
+          case "productivity":
+            outputMultiplier += effect[1];
+            break;
+        }
+      }
     }
+
+    currentSession.CraftingSpeedMultiplier = speedMultiplier;
+    currentSession.CraftingOutputMultiplier = outputMultiplier;
   }
 
   private createSessionImpl(recipeName: string, sessionId?: string): CalculatorSession {
@@ -92,9 +101,50 @@ export class CalculatorService {
       throw "Recipe cant be crafted in this machine";
 
     currentSession.CraftingMachine = craftingMachine;
-    currentSession.CraftingSpeedMultiplier = craftingMachine.craftingSpeed;
 
+    let moduleSizeDiff = currentSession.Modules.length - currentSession.CraftingMachine.moduleInventorySize;
+
+    if (moduleSizeDiff > 0)
+      currentSession.Modules.splice(currentSession.Modules.length - moduleSizeDiff, moduleSizeDiff);
+
+    CalculatorService.updateMulitplier(currentSession);
+    this.updateForTargetAmount(currentSession);
     this.storeSessions();
   }
 
+  public addModuleToSession(currentSession: CalculatorSession, module: FactorioModule) {
+    if (currentSession.CraftingMachine == null)
+      throw "No crafting machine selected. Please select one before adding modules!";
+    if (currentSession.Modules.length === currentSession.CraftingMachine.moduleInventorySize)
+      throw "Maximum amount of modules already reached. Can't add any more!";
+
+    currentSession.Modules.push(module);
+    CalculatorService.updateMulitplier(currentSession);
+    this.updateForTargetAmount(currentSession);
+  }
+
+  public removeModule(currentSession: CalculatorSession, module: FactorioModule) {
+    let index = currentSession.Modules.findIndex(x => x.name === module.name);
+
+    if (index === -1)
+      throw "Module not found!";
+
+    currentSession.Modules.splice(index, 1);
+    CalculatorService.updateMulitplier(currentSession);
+    this.updateForTargetAmount(currentSession);
+  }
+
+  private updateForTargetAmountImpl(currentSession: CalculatorSession) {
+
+    currentSession.CraftingsPerSecond = 1 / (currentSession.Recipe.energy / currentSession.CraftingSpeedMultiplier);
+    currentSession.ItemsPerSecond = currentSession.CraftingsPerSecond * currentSession.Recipe.product.amount * currentSession.CraftingOutputMultiplier;
+    currentSession.TargetCraftingsPerSecond = currentSession.TargetAmountPerSecond / currentSession.Recipe.product.amount;
+    currentSession.NeededAssemblersCount = currentSession.TargetCraftingsPerSecond / currentSession.CraftingsPerSecond;
+
+    for (let subSession of currentSession.SubSessions) {
+      let amount = currentSession.Recipe.ingredients.find(x => x.name === subSession.Recipe.name).amount;
+      subSession.TargetAmountPerSecond = currentSession.TargetCraftingsPerSecond * amount;
+      this.updateForTargetAmountImpl(subSession);
+    }
+  }
 }

@@ -30,6 +30,7 @@ export class StorageService {
   constructor() {
     this._recipeCache = JSON.parse(localStorage.getItem(StorageService.recipeStorageKey));
     this._craftingMachineCache = JSON.parse(localStorage.getItem(StorageService.craftingMachinesStorageKey));
+    this._modulesCache = JSON.parse(localStorage.getItem(StorageService.modulesStorageKey));
   }
 
   get recipesChanged(): Subject<FactorioRecipe[]> {

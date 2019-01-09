@@ -20,6 +20,22 @@
   grid-row: 5;
 }
 
+.sixth-row {
+  grid-row: 6;
+}
+
+.seventh-row {
+  grid-row: 7;
+}
+
+.eigth-row {
+  grid-row: 8;
+}
+
+.nineth-row {
+  grid-row: 9;
+}
+
 .first-column {
   grid-column: 1;
 }
@@ -38,6 +54,22 @@
 
 .fifth-column {
   grid-column: 5;
+}
+
+.sixth-column {
+  grid-column: 6;
+}
+
+.seventh-column {
+  grid-column: 7;
+}
+
+.eigth-column {
+  grid-column: 8;
+}
+
+.nineth-column {
+  grid-column: 9;
 }
 
 ul {

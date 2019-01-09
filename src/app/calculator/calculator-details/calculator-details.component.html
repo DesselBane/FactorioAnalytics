@@ -41,17 +41,10 @@
       <mat-expansion-panel-header>Details</mat-expansion-panel-header>
       <div id="calc-details-exp-details-content">
         <div class="first-row first-column" id="calc-details-recipe-details">
-          <mat-form-field class="first-row">
-            <input [(ngModel)]="CurrentSession.Recipe.energy"
-                   disabled
-                   matInput
-                   name="input_recipeEnergy"
-                   placeholder="Energy">
-          </mat-form-field>
+          <h3 class="first-row">Craftable in:</h3>
           <mat-selection-list (selectionChange)="onCraftingMachineSelectionChanged($event)"
                               class="second-row"
                               dense>
-            <h3>Craftable in:</h3>
             <div *ngFor="let craftingMachine of CraftingMachines">
               <mat-list-option *ngIf="recipeCanBeCraftedInMachine(CurrentSession.Recipe,craftingMachine)"
                                [selected]="craftingMachine.name === CurrentSession?.CraftingMachine?.name"
@@ -66,8 +59,39 @@
               </mat-list-option>
             </div>
           </mat-selection-list>
-          <mat-list class="third-row" dense>
-            <h3>Ingredients:</h3>
+
+          <div class="third-row" id="calc-details-modules-heading">
+            <h3 class="first-column">Modules ({{CurrentSession.Modules.length}}
+              /{{CurrentSession?.CraftingMachine?.moduleInventorySize || 0}}) :</h3>
+            <button (click)="on_btn_add_module_click()"
+                    class="third-column"
+                    mat-icon-button>
+              <mat-icon>add</mat-icon>
+            </button>
+          </div>
+
+          <mat-list class="fourth-row" dense>
+            <mat-list-item *ngFor="let module of CurrentSession.Modules"
+                           class="moduleList">
+              <img [src]="getIconByName(module.name)"
+                   alt=""
+                   class="first-column"
+                   height="32"
+                   width="32"/>
+              <p class="second-column">
+                {{module.name | replaceChar: '-':' ' | titlecase}}
+              </p>
+              <button (click)="on_btn_remove_module_click(module)"
+                      class="fourth-column"
+                      mat-icon-button>
+                <mat-icon class="mat-24">delete</mat-icon>
+              </button>
+            </mat-list-item>
+          </mat-list>
+
+          <h3 class="seventh-row">Ingredients:</h3>
+
+          <mat-list class="eigth-row" dense>
             <mat-list-item *ngFor="let ingridient of CurrentSession.Recipe.ingredients">
               <span style="margin-right: .5em">{{ingridient.amount}}x</span>
               <img [src]="getIconByName(ingridient.name)"
@@ -80,35 +104,43 @@
           </mat-list>
         </div>
         <div class="first-row second-column" id="calc-details-calc-details">
-          <mat-form-field class="first-row">
+          <h3 class="first-row">Modifiers:</h3>
+          <mat-form-field class="second-row">
+            <input [(ngModel)]="CurrentSession.Recipe.energy"
+                   disabled
+                   matInput
+                   name="input_recipeEnergy"
+                   placeholder="Energy">
+          </mat-form-field>
+          <mat-form-field class="third-row">
             <input [(ngModel)]="CurrentSession.CraftingSpeedMultiplier"
                    disabled
                    matInput
                    name="input_craftingSpeedMultiplier"
                    placeholder="Crafting Speed Multiplier">
           </mat-form-field>
-          <mat-form-field class="second-row">
+          <mat-form-field class="fourth-row">
             <input [(ngModel)]="CurrentSession.CraftingOutputMultiplier"
                    disabled
                    matInput
                    name="input_craftingOutputMultiplier"
                    placeholder="Crafting Output Multiplier">
           </mat-form-field>
-          <mat-form-field class="third-row">
+          <mat-form-field class="fifth-row">
             <input [(ngModel)]="CurrentSession.TargetCraftingsPerSecond"
                    disabled
                    matInput
                    name="input_targetCraftingsPerSecond"
                    placeholder="Target Craftings Per Second">
           </mat-form-field>
-          <mat-form-field class="fourth-row">
+          <mat-form-field class="sixth-row">
             <input [(ngModel)]="CurrentSession.CraftingsPerSecond"
                    disabled
                    matInput
                    name="input_CraftingsPerSecond"
                    placeholder="Craftings Per Second">
           </mat-form-field>
-          <mat-form-field class="fifth-row">
+          <mat-form-field class="seventh-row">
             <input [(ngModel)]="CurrentSession.ItemsPerSecond"
                    disabled
                    matInput

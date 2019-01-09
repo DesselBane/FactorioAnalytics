@@ -21,9 +21,24 @@ form {
 
 #calc-details-recipe-details {
   display: grid;
-  grid-template-rows: auto auto auto;
+  grid-template-rows: repeat(8, min-content);
+}
+
+#calc-details-modules-heading {
+  display: grid;
+  grid-template-columns: max-content auto min-content;
+  align-items: center;
+}
+
+#calc-details-modules-heading button {
+  margin-right: 6px;
 }
 
 mat-form-field {
   margin: .5em;
+}
+
+.moduleList {
+  display: grid;
+  grid-template-columns: auto auto 1fr auto;
 }
