@@ -1,4 +1,4 @@
-import {FactorioItem} from "./i-factorio-item";
+import {FactorioItem} from "./factorio-item";
 
 
 export class FactorioRecipe {

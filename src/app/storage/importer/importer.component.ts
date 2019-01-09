@@ -24,4 +24,8 @@ export class ImporterComponent implements OnInit {
     fileSelector.click();
 
   }
+
+  on_btn_clear_all_click() {
+    StorageService.clearLocalStorage();
+  }
 }
