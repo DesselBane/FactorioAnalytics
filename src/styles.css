@@ -73,3 +73,7 @@ li {
   /* Support for IE. */
   font-feature-settings: 'liga';
 }
+
+img {
+  vertical-align: middle;
+}

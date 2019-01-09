@@ -5,8 +5,7 @@
       <img [src]="getIconByName(CurrentSession.Recipe.name)"
            alt=""
            height="32"
-           width="32"
-           style="vertical-align: middle"/>
+           width="32"/>
       <span>{{CurrentSession.Recipe.name | replaceChar: '-':' ' | titlecase}}</span>
     </div>
 
@@ -74,7 +73,8 @@
               <img [src]="getIconByName(ingridient.name)"
                    height="32"
                    width="32"
-                   alt="" style="vertical-align: middle; margin-right: .5em"/>
+                   alt=""
+                   style="margin-right: .5em"/>
               <span>{{ingridient.name | replaceChar: '-':' ' | titlecase}}</span>
             </mat-list-item>
           </mat-list>
