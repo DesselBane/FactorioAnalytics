@@ -73,19 +73,23 @@
 
           <mat-list class="fourth-row" dense>
             <mat-list-item *ngFor="let module of CurrentSession.Modules"
-                           class="moduleList">
-              <img [src]="getIconByName(module.name)"
-                   alt=""
-                   class="first-column"
-                   height="32"
-                   width="32"/>
-              <p class="second-column">
+            >
+              <div class="mat-list-text">
+
+              <span class="">
+                <img [src]="getIconByName(module.name)"
+                     alt=""
+                     class=""
+                     height="32"
+                     width="32"/>
                 {{module.name | replaceChar: '-':' ' | titlecase}}
-              </p>
+              </span>
+              </div>
+
               <button (click)="on_btn_remove_module_click(module)"
-                      class="fourth-column"
+                      class="btn_remove_module"
                       mat-icon-button>
-                <mat-icon class="mat-24">delete</mat-icon>
+                <mat-icon>delete</mat-icon>
               </button>
             </mat-list-item>
           </mat-list>
