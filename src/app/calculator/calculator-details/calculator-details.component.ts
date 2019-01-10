@@ -79,7 +79,7 @@ export class CalculatorDetailsComponent implements OnInit {
 
   onCraftingMachineSelectionChanged($event: MatSelectionListChange) {
     this._calcService.updateCraftingMachine(this.CurrentSession, $event.option.value);
-    this._calcService.updateForTargetAmount(this.CurrentSession);
+    this.updateModuleGroups();
   }
 
   btn_add_limitation() {
