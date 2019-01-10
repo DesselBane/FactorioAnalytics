@@ -65,6 +65,7 @@
               /{{CurrentSession?.CraftingMachine?.moduleInventorySize || 0}}) :</h3>
             <button (click)="on_btn_add_module_click()"
                     class="third-column"
+                    [disabled]="CurrentSession?.CraftingMachine?.moduleInventorySize == null || CurrentSession.CraftingMachine.moduleInventorySize <= CurrentSession.Modules.length"
                     mat-icon-button>
               <mat-icon>add</mat-icon>
             </button>

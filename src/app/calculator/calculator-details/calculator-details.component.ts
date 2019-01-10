@@ -4,7 +4,7 @@ import {CalculatorService} from "../calculator.service";
 import {StorageService} from "../../storage/storage.service";
 import {FactorioRecipe} from "../../model/factorio-recipe";
 import {FactorioCraftingMachine} from "../../model/factorio-crafting-machine";
-import {MatDialog, MatListOption, MatSelectionList, MatSelectionListChange} from "@angular/material";
+import {MatDialog, MatListOption, MatSelectionList, MatSelectionListChange, MatSnackBar} from "@angular/material";
 import {SelectionModel} from "@angular/cdk/collections";
 import {FactorioModule} from "../../model/factorio-module";
 import {AddModuleDialogComponent} from "./add-module-dialog/add-module-dialog.component";
@@ -42,14 +42,17 @@ export class CalculatorDetailsComponent implements OnInit {
     }
   ];
   private _addModuleDialog: MatDialog;
+  private _snackbar: MatSnackBar;
 
 
   constructor(calcService: CalculatorService,
               storageService: StorageService,
-              addModuleDialog: MatDialog) {
+              addModuleDialog: MatDialog,
+              snackbar: MatSnackBar) {
     this._calcService = calcService;
     this._storageService = storageService;
     this._addModuleDialog = addModuleDialog;
+    this._snackbar = snackbar;
   }
 
   ngOnInit() {
@@ -95,7 +98,13 @@ export class CalculatorDetailsComponent implements OnInit {
     dialogRef.afterClosed()
       .subscribe(result => {
         if (result != null)
-          this._calcService.addModuleToSession(this.CurrentSession, result);
+          try {
+            this._calcService.addModuleToSession(this.CurrentSession, result);
+          } catch (error) {
+            this._snackbar.open(error, 'I\'ll do better.', {
+              duration: 10000
+            })
+          }
       })
   }
 
