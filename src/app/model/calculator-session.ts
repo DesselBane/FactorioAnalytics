@@ -9,7 +9,8 @@ export class CalculatorSession {
 
   public Recipe: FactorioRecipe;
   public CraftingMachine: FactorioCraftingMachine;
-  public Modules: FactorioModule[];
+  public Modules: FactorioModule[] = [];
+  public Beacons: FactorioModule[] = [];
 
   SubSessions: CalculatorSession[] = [];
 
@@ -30,9 +31,6 @@ export class CalculatorSession {
 
     if (this.SessionId == null)
       this.SessionId = UUID.UUID();
-
-    this.Modules = [];
-
   }
 
 }

@@ -21,6 +21,7 @@ export class CalculatorDetailsComponent implements OnInit {
   public Modules: FactorioModule[];
 
   public ModuleGroups: ModuleGroup[];
+  public BeaconGroups: ModuleGroup[];
 
   @Input()
   public CurrentSession: CalculatorSession;
@@ -63,6 +64,7 @@ export class CalculatorDetailsComponent implements OnInit {
     this._selectionList.selectedOptions = new SelectionModel<MatListOption>(false);
     this.Modules = this._storageService.modulesCache;
     this.updateModuleGroups();
+    this.updateBeaconGroups();
   }
 
   public getIconByName(name: string): string {
@@ -87,7 +89,15 @@ export class CalculatorDetailsComponent implements OnInit {
   }
 
   on_btn_add_module_click() {
-    this.openAddModuleDialog();
+    const dialogRef = this._addModuleDialog.open(AddModuleDialogComponent, {
+      data: this.Modules
+    });
+
+    dialogRef.afterClosed()
+      .subscribe(result => {
+        if (result != null)
+          this.addModule(result);
+      });
   }
 
   on_btn_remove_module_click(module: FactorioModule) {
@@ -106,18 +116,6 @@ export class CalculatorDetailsComponent implements OnInit {
     }
   }
 
-  private openAddModuleDialog() {
-    const dialogRef = this._addModuleDialog.open(AddModuleDialogComponent, {
-      data: this.Modules
-    });
-
-    dialogRef.afterClosed()
-      .subscribe(result => {
-        if (result != null)
-          this.addModule(result);
-      });
-  }
-
   private updateModuleGroups() {
     let result = [];
 
@@ -132,6 +130,50 @@ export class CalculatorDetailsComponent implements OnInit {
     }
 
     this.ModuleGroups = result;
+  }
+
+  on_btn_add_beacon_click() {
+    const dialogRef = this._addModuleDialog.open(AddModuleDialogComponent, {
+      data: this.Modules
+    });
+
+    dialogRef.afterClosed()
+      .subscribe(result => {
+        if (result != null)
+          this.addBeacon(result);
+      });
+  }
+
+  on_btn_remove_beacon_click(module: FactorioModule) {
+    this._calcService.removeBeacon(this.CurrentSession, module);
+    this.updateBeaconGroups();
+  }
+
+  public addBeacon(module: FactorioModule) {
+    try {
+      this._calcService.addBeaconToSession(this.CurrentSession, module);
+      this.updateBeaconGroups();
+    } catch (error) {
+      this._snackbar.open(error, 'I\'ll do better.', {
+        duration: 10000
+      });
+    }
+  }
+
+  private updateBeaconGroups() {
+    let result = [];
+
+    for (let module of this.CurrentSession.Beacons) {
+      let indexOfExistingGroup = result.findIndex(x => x.module.name === module.name);
+
+      if (indexOfExistingGroup === -1)
+        result.push({module: module, count: 1});
+      else
+        result[indexOfExistingGroup].count += 1;
+
+    }
+
+    this.BeaconGroups = result;
   }
 }
 

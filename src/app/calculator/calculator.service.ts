@@ -36,10 +36,10 @@ export class CalculatorService {
   }
 
   private static updateMulitplier(currentSession: CalculatorSession) {
-    let speedMultiplier = currentSession.CraftingMachine.craftingSpeed;
+    let speedMultiplier = 1;
     let outputMultiplier = 1;
 
-    for (let module of currentSession.Modules) {
+    for (let module of currentSession.Modules)
       for (let effect of module.moduleEffects) {
         switch (effect[0]) {
           case "speed":
@@ -50,9 +50,21 @@ export class CalculatorService {
             break;
         }
       }
-    }
 
-    currentSession.CraftingSpeedMultiplier = speedMultiplier;
+
+    for (let module of currentSession.Beacons)
+      for (let effect of module.moduleEffects) {
+        switch (effect[0]) {
+          case "speed":
+            speedMultiplier += effect[1] / 2;
+            break;
+          case "productivity":
+            outputMultiplier += effect[1] / 2;
+            break;
+        }
+      }
+
+    currentSession.CraftingSpeedMultiplier = speedMultiplier * currentSession.CraftingMachine.craftingSpeed;
     currentSession.CraftingOutputMultiplier = outputMultiplier;
   }
 
@@ -146,5 +158,22 @@ export class CalculatorService {
       subSession.TargetAmountPerSecond = currentSession.TargetCraftingsPerSecond * amount;
       this.updateForTargetAmountImpl(subSession);
     }
+  }
+
+  public addBeaconToSession(currentSession: CalculatorSession, module: FactorioModule) {
+    currentSession.Beacons.push(module);
+    CalculatorService.updateMulitplier(currentSession);
+    this.updateForTargetAmount(currentSession);
+  }
+
+  removeBeacon(currentSession: CalculatorSession, module: FactorioModule) {
+    let index = currentSession.Beacons.findIndex(x => x.name === module.name);
+
+    if (index === -1)
+      throw "Module not found!";
+
+    currentSession.Beacons.splice(index, 1);
+    CalculatorService.updateMulitplier(currentSession);
+    this.updateForTargetAmount(currentSession);
   }
 }

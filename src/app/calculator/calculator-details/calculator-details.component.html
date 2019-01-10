@@ -106,6 +106,49 @@
             </mat-list-item>
           </mat-list>
 
+          <div class="fifth-row headingWithAddButton">
+            <h3 class="first-column">Beacons :</h3>
+            <button #btn_add_module
+                    (click)="on_btn_add_beacon_click()"
+                    class="third-column"
+                    disableRipple
+                    mat-icon-button>
+              <mat-icon>add</mat-icon>
+            </button>
+          </div>
+
+          <mat-list class="sixth-row" dense>
+            <mat-list-item *ngFor="let group of BeaconGroups">
+              <div class="mat-list-text">
+
+              <span class="">
+                <img [src]="getIconByName(group.module.name)"
+                     alt=""
+                     class=""
+                     height="32"
+                     width="32"/>
+                {{group.module.name || "undefined" | replaceChar: '-':' ' | titlecase}}
+              </span>
+              </div>
+
+              <div class="addRemoveControl">
+                <button (click)="on_btn_remove_beacon_click(group.module)"
+                        disableRipple
+                        mat-icon-button>
+                  <mat-icon>remove</mat-icon>
+                </button>
+
+                <span>{{group.count}}</span>
+
+                <button (click)="addBeacon(group.module)"
+                        disableRipple
+                        mat-icon-button>
+                  <mat-icon>add</mat-icon>
+                </button>
+              </div>
+            </mat-list-item>
+          </mat-list>
+
           <h3 class="seventh-row">Ingredients:</h3>
 
           <mat-list class="eigth-row" dense>
