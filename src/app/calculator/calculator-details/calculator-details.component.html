@@ -60,11 +60,13 @@
             </div>
           </mat-selection-list>
 
-          <div class="third-row" id="calc-details-modules-heading">
+          <div class="third-row headingWithAddButton">
             <h3 class="first-column">Modules ({{CurrentSession.Modules.length}}
               /{{CurrentSession?.CraftingMachine?.moduleInventorySize || 0}}) :</h3>
             <button (click)="on_btn_add_module_click()"
+                    #btn_add_module
                     class="third-column"
+                    disableRipple
                     [disabled]="CurrentSession?.CraftingMachine?.moduleInventorySize == null || CurrentSession.CraftingMachine.moduleInventorySize <= CurrentSession.Modules.length"
                     mat-icon-button>
               <mat-icon>add</mat-icon>
@@ -72,25 +74,35 @@
           </div>
 
           <mat-list class="fourth-row" dense>
-            <mat-list-item *ngFor="let module of CurrentSession.Modules"
-            >
+            <mat-list-item *ngFor="let group of ModuleGroups">
               <div class="mat-list-text">
 
               <span class="">
-                <img [src]="getIconByName(module.name)"
+                <img [src]="getIconByName(group.module.name)"
                      alt=""
                      class=""
                      height="32"
                      width="32"/>
-                {{module.name | replaceChar: '-':' ' | titlecase}}
+                {{group.module.name || "undefined" | replaceChar: '-':' ' | titlecase}}
               </span>
               </div>
 
-              <button (click)="on_btn_remove_module_click(module)"
-                      class="btn_remove_module"
-                      mat-icon-button>
-                <mat-icon>delete</mat-icon>
-              </button>
+              <div class="addRemoveControl">
+                <button (click)="on_btn_remove_module_click(group.module)"
+                        disableRipple
+                        mat-icon-button>
+                  <mat-icon>remove</mat-icon>
+                </button>
+
+                <span>{{group.count}}</span>
+
+                <button (click)="addModule(group.module)"
+                        [disabled]="btn_add_module.disabled"
+                        disableRipple
+                        mat-icon-button>
+                  <mat-icon>add</mat-icon>
+                </button>
+              </div>
             </mat-list-item>
           </mat-list>
 

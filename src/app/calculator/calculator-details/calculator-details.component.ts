@@ -8,6 +8,7 @@ import {MatDialog, MatListOption, MatSelectionList, MatSelectionListChange, MatS
 import {SelectionModel} from "@angular/cdk/collections";
 import {FactorioModule} from "../../model/factorio-module";
 import {AddModuleDialogComponent} from "./add-module-dialog/add-module-dialog.component";
+import {ModuleGroup} from "../../model/module.group";
 
 @Component({
   selector: 'app-calculator-details',
@@ -18,6 +19,8 @@ export class CalculatorDetailsComponent implements OnInit {
 
   public CraftingMachines: FactorioCraftingMachine[];
   public Modules: FactorioModule[];
+
+  public ModuleGroups: ModuleGroup[];
 
   @Input()
   public CurrentSession: CalculatorSession;
@@ -59,6 +62,7 @@ export class CalculatorDetailsComponent implements OnInit {
     this.CraftingMachines = this._storageService.craftingMachineCache;
     this._selectionList.selectedOptions = new SelectionModel<MatListOption>(false);
     this.Modules = this._storageService.modulesCache;
+    this.updateModuleGroups();
   }
 
   public getIconByName(name: string): string {
@@ -88,6 +92,18 @@ export class CalculatorDetailsComponent implements OnInit {
 
   on_btn_remove_module_click(module: FactorioModule) {
     this._calcService.removeModule(this.CurrentSession, module);
+    this.updateModuleGroups();
+  }
+
+  public addModule(module: FactorioModule) {
+    try {
+      this._calcService.addModuleToSession(this.CurrentSession, module);
+      this.updateModuleGroups();
+    } catch (error) {
+      this._snackbar.open(error, 'I\'ll do better.', {
+        duration: 10000
+      });
+    }
   }
 
   private openAddModuleDialog() {
@@ -98,16 +114,24 @@ export class CalculatorDetailsComponent implements OnInit {
     dialogRef.afterClosed()
       .subscribe(result => {
         if (result != null)
-          try {
-            this._calcService.addModuleToSession(this.CurrentSession, result);
-          } catch (error) {
-            this._snackbar.open(error, 'I\'ll do better.', {
-              duration: 10000
-            })
-          }
-      })
+          this.addModule(result);
+      });
   }
 
+  private updateModuleGroups() {
+    let result = [];
 
+    for (let module of this.CurrentSession.Modules) {
+      let indexOfExistingGroup = result.findIndex(x => x.module.name === module.name);
+
+      if (indexOfExistingGroup === -1)
+        result.push({module: module, count: 1});
+      else
+        result[indexOfExistingGroup].count += 1;
+
+    }
+
+    this.ModuleGroups = result;
+  }
 }
 

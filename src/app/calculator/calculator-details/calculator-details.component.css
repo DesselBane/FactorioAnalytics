@@ -24,13 +24,13 @@ form {
   grid-template-rows: repeat(8, min-content);
 }
 
-#calc-details-modules-heading {
+.headingWithAddButton {
   display: grid;
   grid-template-columns: max-content auto min-content;
   align-items: center;
 }
 
-#calc-details-modules-heading button {
+.headingWithAddButton button {
   margin-right: 4px;
 }
 
@@ -44,9 +44,18 @@ mat-form-field {
 }
 
 .btn_remove_module {
-  width: 24px;
+  margin-right: -12px;
 }
 
-.btn_remove_module mat-icon {
-  margin-right: -8px;
+.addRemoveControl {
+  min-width: 107px;
+  margin-right: -17px;
+}
+
+.addRemoveControl button {
+  width: 36px;
+  margin-right: .5em;
+  margin-left: .5em;
+  min-width: 1%;
+  padding: 0;
 }
