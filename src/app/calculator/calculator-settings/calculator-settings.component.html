@@ -1,8 +1,5 @@
-<div class="outerGrid">
-  <div *ngFor="let group of GroupedCraftingMachines; let index = index"
-       [style.grid-row]="index"
-       class="first-column">
-    <h3>{{group[0]  | replaceChar: "-":" " | titlecase}}</h3>
+<mat-card *ngFor="let group of GroupedCraftingMachines">
+  <h2>{{group[0]  | replaceChar: "-":" " | titlecase}}</h2>
     <mat-selection-list (selectionChange)="onCraftingMachineSelectionChanged($event, group)"
                         dense>
       <div *ngFor="let craftingMachine of group[1]">
@@ -18,30 +15,29 @@
         </mat-list-option>
       </div>
     </mat-selection-list>
-  </div>
-  <div *ngFor="let group of GroupedCraftingMachines; let index = index"
-       [style.grid-row]="index"
-       class="second-column">
-    <app-module-list Title="Modules"
-                     (AddModule)="onAddModuleToCategory($event,group)"
-                     (RemoveModule)="onRemoveModuleFromCategory($event,group)"
-                     [MaxNumberOfModules]="group[2].craftingMachine.moduleInventorySize"
-                     [SelectedModules]="group[2].modules"
-                     [AvailableModules]="Modules">
-
-    </app-module-list>
-
-    <app-module-list Title="Beacons"
-                     (AddModule)="onAddBeaconToCategory($event,group)"
-                     (RemoveModule)="onRemoveBeaconFromCategory($event,group)"
-                     [MaxNumberOfModules]="null"
-                     [SelectedModules]="group[2].beacons"
-                     [AvailableModules]="Modules">
-
-    </app-module-list>
-  </div>
 
 
-</div>
+  <app-module-list (AddModule)="onAddModuleToCategory($event,group)"
+                   (RemoveModule)="onRemoveModuleFromCategory($event,group)"
+                   Title="Modules"
+                   [AvailableModules]="Modules"
+                   [MaxNumberOfModules]="group[2].craftingMachine.moduleInventorySize"
+                   [SelectedModules]="group[2].modules"
+                   class="modulesList">
+
+  </app-module-list>
+
+  <app-module-list (AddModule)="onAddBeaconToCategory($event,group)"
+                   (RemoveModule)="onRemoveBeaconFromCategory($event,group)"
+                   Title="Beacons"
+                   [AvailableModules]="Modules"
+                   [MaxNumberOfModules]="null"
+                   [SelectedModules]="group[2].beacons"
+                   class="beaconList">
+
+  </app-module-list>
+</mat-card>
+
+
 
 

@@ -1,7 +1,7 @@
 <div>
   <div class="headingWithAddButton">
-    <h3 class="first-column">{{Title}} <span *ngIf="MaxNumberOfModules != null">({{SelectedModules.length}}
-      /{{MaxNumberOfModules}}) </span>:</h3>
+    <h4 class="first-column">{{Title}} <span *ngIf="MaxNumberOfModules != null">({{SelectedModules.length}}
+      /{{MaxNumberOfModules}}) </span>:</h4>
     <button #btn_add_module
             (click)="on_btn_add_module_click()"
             [disabled]="MaxNumberOfModules != null && MaxNumberOfModules <= SelectedModules.length"
