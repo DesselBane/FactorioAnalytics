@@ -3,10 +3,10 @@
        [style.grid-row]="index"
        class="first-column">
     <h3>{{group[0]  | replaceChar: "-":" " | titlecase}}</h3>
-    <mat-selection-list (selectionChange)="onCraftingMachineSelectionChanged($event)"
+    <mat-selection-list (selectionChange)="onCraftingMachineSelectionChanged($event, group)"
                         dense>
       <div *ngFor="let craftingMachine of group[1]">
-        <mat-list-option [selected]="craftingMachine.name === CurrentSession?.CraftingMachine?.name"
+        <mat-list-option [selected]="craftingMachine.name === group[2]?.craftingMachine?.name"
                          [value]="craftingMachine">
                 <span>
                   <img [src]="getIconByName(craftingMachine.name)"
@@ -23,11 +23,19 @@
        [style.grid-row]="index"
        class="second-column">
     <app-module-list Title="Modules"
+                     (AddModule)="onAddModuleToCategory($event,group)"
+                     (RemoveModule)="onRemoveModuleFromCategory($event,group)"
+                     [MaxNumberOfModules]="group[2].craftingMachine.moduleInventorySize"
+                     [SelectedModules]="group[2].modules"
                      [AvailableModules]="Modules">
 
     </app-module-list>
 
     <app-module-list Title="Beacons"
+                     (AddModule)="onAddBeaconToCategory($event,group)"
+                     (RemoveModule)="onRemoveBeaconFromCategory($event,group)"
+                     [MaxNumberOfModules]="null"
+                     [SelectedModules]="group[2].beacons"
                      [AvailableModules]="Modules">
 
     </app-module-list>
