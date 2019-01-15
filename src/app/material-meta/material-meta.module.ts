@@ -8,6 +8,7 @@ import {
   MatDatepickerModule,
   MatDialogModule,
   MatExpansionModule,
+  MatGridListModule,
   MatIconModule,
   MatInputModule,
   MatListModule,
@@ -43,7 +44,8 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
     MatSidenavModule,
     MatToolbarModule,
     MatTabsModule,
-    MatTreeModule
+    MatTreeModule,
+    MatGridListModule
   ],
   exports: [
     BrowserAnimationsModule,
@@ -64,7 +66,8 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
     MatSidenavModule,
     MatToolbarModule,
     MatTabsModule,
-    MatTreeModule
+    MatTreeModule,
+    MatGridListModule
   ]
 })
 export class MaterialMetaModule {

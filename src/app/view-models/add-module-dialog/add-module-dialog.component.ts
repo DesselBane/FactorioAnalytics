@@ -1,7 +1,7 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material";
-import {FactorioModule} from "../../../model/factorio-module";
-import {StorageService} from "../../../storage/storage.service";
+import {FactorioModule} from "../../model/factorio-module";
+import {StorageService} from "../../storage/storage.service";
 
 @Component({
   selector: 'app-add-module-dialog',

@@ -1,0 +1,22 @@
+.headingWithAddButton {
+  display: grid;
+  grid-template-columns: max-content auto min-content;
+  align-items: center;
+}
+
+.headingWithAddButton button {
+  margin-right: 4px;
+}
+
+.addRemoveControl {
+  min-width: 114px;
+  margin-right: -17px;
+}
+
+.addRemoveControl button {
+  width: 36px;
+  margin-right: .5em;
+  margin-left: .5em;
+  min-width: 1%;
+  padding: 0;
+}

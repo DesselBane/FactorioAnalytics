@@ -1,0 +1,39 @@
+<div class="outerGrid">
+  <div *ngFor="let group of GroupedCraftingMachines; let index = index"
+       [style.grid-row]="index"
+       class="first-column">
+    <h3>{{group[0]  | replaceChar: "-":" " | titlecase}}</h3>
+    <mat-selection-list (selectionChange)="onCraftingMachineSelectionChanged($event)"
+                        dense>
+      <div *ngFor="let craftingMachine of group[1]">
+        <mat-list-option [selected]="craftingMachine.name === CurrentSession?.CraftingMachine?.name"
+                         [value]="craftingMachine">
+                <span>
+                  <img [src]="getIconByName(craftingMachine.name)"
+                       alt=""
+                       height="32"
+                       width="32"/>
+                  {{craftingMachine.name | replaceChar: '-':' ' | titlecase}}
+                </span>
+        </mat-list-option>
+      </div>
+    </mat-selection-list>
+  </div>
+  <div *ngFor="let group of GroupedCraftingMachines; let index = index"
+       [style.grid-row]="index"
+       class="second-column">
+    <app-module-list Title="Modules"
+                     [AvailableModules]="Modules">
+
+    </app-module-list>
+
+    <app-module-list Title="Beacons"
+                     [AvailableModules]="Modules">
+
+    </app-module-list>
+  </div>
+
+
+</div>
+
+

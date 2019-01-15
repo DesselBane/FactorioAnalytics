@@ -1,0 +1,47 @@
+<div>
+  <div class="headingWithAddButton">
+    <h3 class="first-column">{{Title}} <span *ngIf="MaxNumberOfModules != null">({{SelectedModules.length}}
+      /{{MaxNumberOfModules}}) </span>:</h3>
+    <button #btn_add_module
+            (click)="on_btn_add_module_click()"
+            [disabled]="MaxNumberOfModules != null && MaxNumberOfModules <= SelectedModules.length"
+            class="third-column"
+            disableRipple
+            mat-icon-button>
+      <mat-icon>add</mat-icon>
+    </button>
+  </div>
+
+  <mat-list class="fourth-row" dense>
+    <mat-list-item *ngFor="let group of ModuleGroups">
+      <div class="mat-list-text">
+
+              <span class="">
+                <img [src]="getIconByName(group.module.name)"
+                     alt=""
+                     class=""
+                     height="32"
+                     width="32"/>
+                {{group.module.name || "undefined" | replaceChar: '-':' ' | titlecase}}
+              </span>
+      </div>
+
+      <div class="addRemoveControl">
+        <button (click)="on_btn_remove_module_click(group.module)"
+                disableRipple
+                mat-icon-button>
+          <mat-icon>remove</mat-icon>
+        </button>
+
+        <span>{{group.count | number:'2.0-0'}}</span>
+
+        <button (click)="addModule(group.module)"
+                [disabled]="btn_add_module.disabled"
+                disableRipple
+                mat-icon-button>
+          <mat-icon>add</mat-icon>
+        </button>
+      </div>
+    </mat-list-item>
+  </mat-list>
+</div>

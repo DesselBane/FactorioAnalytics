@@ -8,14 +8,15 @@ import {CalculatorDetailsComponent} from './calculator-details/calculator-detail
 import {FormsModule} from "@angular/forms";
 import {PipesModule} from "../pipes/pipes.module";
 import {CalculatorHistoryComponent} from './calculator-history/calculator-history.component';
-import {AddModuleDialogComponent} from './calculator-details/add-module-dialog/add-module-dialog.component';
+import {CalculatorSettingsComponent} from './calculator-settings/calculator-settings.component';
+import {ViewModelsModule} from "../view-models/view-models.module";
 
 @NgModule({
   declarations: [
     CalculatorOverviewComponent,
     CalculatorDetailsComponent,
     CalculatorHistoryComponent,
-    AddModuleDialogComponent
+    CalculatorSettingsComponent
   ],
   imports: [
     CommonModule,
@@ -23,13 +24,10 @@ import {AddModuleDialogComponent} from './calculator-details/add-module-dialog/a
     RecipesModule,
     FormsModule,
     PipesModule,
-
+    ViewModelsModule,
 
 
     CalculatorRoutingModule
-  ],
-  entryComponents: [
-    AddModuleDialogComponent
   ]
 })
 export class CalculatorModule {

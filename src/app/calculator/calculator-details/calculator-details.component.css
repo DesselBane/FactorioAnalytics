@@ -38,15 +38,6 @@ mat-form-field {
   margin: .5em;
 }
 
-.moduleList {
-  display: grid;
-  grid-template-columns: auto auto 1fr auto;
-}
-
-.btn_remove_module {
-  margin-right: -12px;
-}
-
 .addRemoveControl {
   min-width: 107px;
   margin-right: -17px;
