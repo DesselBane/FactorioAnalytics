@@ -3,7 +3,6 @@ import {FactorioRecipe} from "../model/factorio-recipe";
 import {Subject} from "rxjs";
 import {FactorioCraftingMachine} from "../model/factorio-crafting-machine";
 import {FactorioModule} from "../model/factorio-module";
-import {Settings} from "../model/settings";
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +13,6 @@ export class StorageService {
   private static readonly recipeStorageKey = "factorio-recepie-store";
   private static readonly craftingMachinesStorageKey = "factorio-crafting-machines-store";
   private static readonly modulesStorageKey = "factorio-modules-store";
-  private static readonly settingsKey = "factorio-settings";
 
   private _recipeCache: FactorioRecipe[];
   private _craftingMachineCache: FactorioCraftingMachine[];
@@ -161,14 +159,6 @@ export class StorageService {
     this._modulesCache = data;
     localStorage.setItem(StorageService.modulesStorageKey, JSON.stringify(data));
     this._modulesChanged.next(data);
-  }
-
-  public static storeSettings(settings: Settings) {
-    localStorage.setItem(StorageService.settingsKey, JSON.stringify(settings));
-  }
-
-  public static loadSettings(): Settings {
-    return JSON.parse(localStorage.getItem(StorageService.settingsKey));
   }
 
 }

@@ -1,0 +1,8 @@
+<mat-nav-list>
+  <mat-list-item (click)="acceptProfile(profile)" *ngFor="let profile of ProfileNames">
+    {{profile}}
+  </mat-list-item>
+</mat-nav-list>
+<button mat-stroked-button
+        (click)="cancel()">Cancel
+</button>

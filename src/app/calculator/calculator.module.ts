@@ -10,13 +10,15 @@ import {PipesModule} from "../pipes/pipes.module";
 import {CalculatorHistoryComponent} from './calculator-history/calculator-history.component';
 import {CalculatorSettingsComponent} from './calculator-settings/calculator-settings.component';
 import {ViewModelsModule} from "../view-models/view-models.module";
+import {LoadProfileSelectorDialogComponent} from './calculator-settings/load-profile-selector-dialog/load-profile-selector-dialog.component';
 
 @NgModule({
   declarations: [
     CalculatorOverviewComponent,
     CalculatorDetailsComponent,
     CalculatorHistoryComponent,
-    CalculatorSettingsComponent
+    CalculatorSettingsComponent,
+    LoadProfileSelectorDialogComponent
   ],
   imports: [
     CommonModule,
@@ -28,6 +30,9 @@ import {ViewModelsModule} from "../view-models/view-models.module";
 
 
     CalculatorRoutingModule
+  ],
+  entryComponents: [
+    LoadProfileSelectorDialogComponent
   ]
 })
 export class CalculatorModule {

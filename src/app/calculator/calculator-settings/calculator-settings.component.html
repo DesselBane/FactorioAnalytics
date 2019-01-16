@@ -1,10 +1,44 @@
+<mat-card>
+  <form #profileForm="ngForm">
+
+    <h3>Profile</h3>
+    <mat-form-field>
+      <input [(ngModel)]="CurrentProfile.name"
+             matInput
+             name="input_currentProfileName"
+             placeholder="Profile Name">
+    </mat-form-field>
+
+    <button (click)="on_btn_new()"
+            mat-stroked-button>
+      New
+    </button>
+
+    <button (click)="on_btn_makeDefault()"
+            mat-stroked-button>
+      Make Default
+    </button>
+
+    <button (click)="on_btn_save()"
+            mat-stroked-button>
+      Save
+    </button>
+
+    <button (click)="on_btn_load()"
+            mat-stroked-button>
+      Load
+    </button>
+
+  </form>
+</mat-card>
+
 <mat-card *ngFor="let group of GroupedCraftingMachines">
-  <h2>{{group[0]  | replaceChar: "-":" " | titlecase}}</h2>
-    <mat-selection-list (selectionChange)="onCraftingMachineSelectionChanged($event, group)"
-                        dense>
-      <div *ngFor="let craftingMachine of group[1]">
-        <mat-list-option [selected]="craftingMachine.name === group[2]?.craftingMachine?.name"
-                         [value]="craftingMachine">
+  <h3>{{group[0]  | replaceChar: "-":" " | titlecase}}</h3>
+  <mat-selection-list (selectionChange)="onCraftingMachineSelectionChanged($event, group)"
+                      dense>
+    <div *ngFor="let craftingMachine of group[1]">
+      <mat-list-option [selected]="craftingMachine.name === group[2]?.craftingMachine?.name"
+                       [value]="craftingMachine">
                 <span>
                   <img [src]="getIconByName(craftingMachine.name)"
                        alt=""
@@ -12,16 +46,16 @@
                        width="32"/>
                   {{craftingMachine.name | replaceChar: '-':' ' | titlecase}}
                 </span>
-        </mat-list-option>
-      </div>
-    </mat-selection-list>
+      </mat-list-option>
+    </div>
+  </mat-selection-list>
 
 
   <app-module-list (AddModule)="onAddModuleToCategory($event,group)"
                    (RemoveModule)="onRemoveModuleFromCategory($event,group)"
                    Title="Modules"
                    [AvailableModules]="Modules"
-                   [MaxNumberOfModules]="group[2].craftingMachine.moduleInventorySize"
+                   [MaxNumberOfModules]="group[2].craftingMachine?.moduleInventorySize"
                    [SelectedModules]="group[2].modules"
                    class="modulesList">
 
