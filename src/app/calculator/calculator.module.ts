@@ -10,12 +10,14 @@ import {PipesModule} from "../pipes/pipes.module";
 import {CalculatorHistoryComponent} from './calculator-history/calculator-history.component';
 import {ViewModelsModule} from "../view-models/view-models.module";
 import {SettingsModule} from "../settings/settings.module";
+import {CalculatorGlobalsComponent} from './calculator-globals/calculator-globals.component';
 
 @NgModule({
   declarations: [
     CalculatorOverviewComponent,
     CalculatorDetailsComponent,
     CalculatorHistoryComponent,
+    CalculatorGlobalsComponent,
   ],
   imports: [
     CommonModule,

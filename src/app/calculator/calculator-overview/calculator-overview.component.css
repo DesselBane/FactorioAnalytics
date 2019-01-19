@@ -9,3 +9,7 @@ app-calculator-details {
 .mat-tree-node {
   align-items: normal;
 }
+
+mat-card {
+  margin: .5em;
+}

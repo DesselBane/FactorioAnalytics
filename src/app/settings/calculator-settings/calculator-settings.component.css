@@ -4,6 +4,8 @@ mat-card {
   display: grid;
   grid-template-columns: 100%;
   grid-template-rows: repeat(4, auto);
+  min-width: 337px;
+
 }
 
 h2 {

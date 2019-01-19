@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {MatDialogRef} from "@angular/material";
-import {SettingsService} from "../../settings.service";
+import {SettingsService} from "../../settings/settings.service";
 
 @Component({
   selector: 'app-load-profile-selector-dialog',

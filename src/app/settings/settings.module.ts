@@ -1,6 +1,5 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {LoadProfileSelectorDialogComponent} from "./calculator-settings/load-profile-selector-dialog/load-profile-selector-dialog.component";
 import {MaterialMetaModule} from "../material-meta/material-meta.module";
 import {RecipesModule} from "../recepies/recipes.module";
 import {FormsModule} from "@angular/forms";
@@ -11,8 +10,7 @@ import {SettingsRoutingModule} from "./settings-routing.module";
 
 @NgModule({
   declarations: [
-    CalculatorSettingsComponent,
-    LoadProfileSelectorDialogComponent
+    CalculatorSettingsComponent
   ],
   imports: [
     RecipesModule,
@@ -26,7 +24,6 @@ import {SettingsRoutingModule} from "./settings-routing.module";
     SettingsRoutingModule
   ],
   entryComponents: [
-    LoadProfileSelectorDialogComponent
   ]
 })
 export class SettingsModule {

@@ -7,7 +7,7 @@ import {FactorioModule} from "../../model/factorio-module";
 import {Settings} from "../../model/settings";
 import {CraftingCategorySetting} from "../../model/craftingCategorySetting";
 import {SettingsService} from "../settings.service";
-import {LoadProfileSelectorDialogComponent} from "./load-profile-selector-dialog/load-profile-selector-dialog.component";
+import {LoadProfileSelectorDialogComponent} from "../../view-models/load-profile-selector-dialog/load-profile-selector-dialog.component";
 
 @Component({
   selector: 'app-calculator-settings',

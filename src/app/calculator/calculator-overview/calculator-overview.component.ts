@@ -40,4 +40,6 @@ export class CalculatorOverviewComponent implements OnInit {
   }
 
   hasNestedChildren = (_: number, nodeData: CalculatorSession) => nodeData.SubSessions.length > 0;
+
+
 }
