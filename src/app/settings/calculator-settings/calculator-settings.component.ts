@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {CalculatorService} from "../calculator.service";
+import {CalculatorService} from "../../calculator/calculator.service";
 import {StorageService} from "../../storage/storage.service";
 import {FactorioCraftingMachine} from "../../model/factorio-crafting-machine";
 import {MatDialog, MatSelectionListChange} from "@angular/material";

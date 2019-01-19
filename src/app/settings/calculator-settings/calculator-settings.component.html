@@ -1,37 +1,40 @@
 <mat-card>
+  <h3>Profile</h3>
+
   <form #profileForm="ngForm">
 
-    <h3>Profile</h3>
-    <mat-form-field>
+    <mat-form-field class="rowSpanFormField">
       <input [(ngModel)]="CurrentProfile.name"
              matInput
              name="input_currentProfileName"
              placeholder="Profile Name">
     </mat-form-field>
 
-    <button (click)="on_btn_new()"
-            mat-stroked-button>
-      New
-    </button>
+    <div class="second-row button-row">
+      <button (click)="on_btn_new()"
+              mat-stroked-button>
+        New
+      </button>
 
-    <button (click)="on_btn_makeDefault()"
-            mat-stroked-button>
-      Make Default
-    </button>
+      <button (click)="on_btn_makeDefault()"
+              mat-stroked-button>
+        Make Default
+      </button>
 
-    <button (click)="on_btn_save()"
-            mat-stroked-button>
-      Save
-    </button>
+      <button (click)="on_btn_save()"
+              mat-stroked-button>
+        Save
+      </button>
 
-    <button (click)="on_btn_load()"
-            mat-stroked-button>
-      Load
-    </button>
-
+      <button (click)="on_btn_load()"
+              mat-stroked-button>
+        Load
+      </button>
+    </div>
   </form>
 </mat-card>
 
+<div class="cardContainer">
 <mat-card *ngFor="let group of GroupedCraftingMachines">
   <h3>{{group[0]  | replaceChar: "-":" " | titlecase}}</h3>
   <mat-selection-list (selectionChange)="onCraftingMachineSelectionChanged($event, group)"
@@ -72,6 +75,6 @@
   </app-module-list>
 </mat-card>
 
-
+</div>
 
 

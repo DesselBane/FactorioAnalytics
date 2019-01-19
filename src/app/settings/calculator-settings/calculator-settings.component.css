@@ -1,0 +1,58 @@
+
+mat-card {
+  margin: .5em;
+  display: grid;
+  grid-template-columns: 100%;
+  grid-template-rows: repeat(4, auto);
+}
+
+h2 {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+mat-selection-list {
+  grid-column: 1;
+  grid-row: 2;
+}
+
+.modulesList {
+  grid-column: 1;
+  grid-row: 3;
+}
+
+.beaconList {
+  grid-column: 1;
+  grid-row: 4;
+}
+
+.cardContainer {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.cardContainer mat-card {
+  flex-grow: 1;
+}
+
+form {
+  display: grid;
+
+}
+
+.rowSpanFormField {
+  margin: .5em;
+  grid-row: 1;
+}
+
+button {
+  margin: .5em;
+  flex-grow: 1;
+}
+
+.button-row {
+  flex-wrap: wrap;
+  flex-direction: row;
+  display: flex;
+}
