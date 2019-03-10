@@ -1,11 +1,12 @@
-import {FactorioRecipe} from "./factorio-recipe";
-import {UUID} from "angular2-uuid";
-import {FactorioCraftingMachine} from "./factorio-crafting-machine";
-import {FactorioModule} from "./factorio-module";
+import {FactorioRecipe} from './factorio-recipe';
+import {UUID} from 'angular2-uuid';
+import {FactorioCraftingMachine} from './factorio-crafting-machine';
+import {FactorioModule} from './factorio-module';
 
 export class CalculatorSession {
 
   public SessionId: string;
+  public Name: string;
 
   public Recipe: FactorioRecipe;
   public CraftingMachine: FactorioCraftingMachine;

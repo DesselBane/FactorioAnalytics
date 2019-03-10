@@ -1,4 +1,24 @@
-<button (click)="on_btn_loadProfile()"
-        mat-stroked-button>
-  Load Profile
-</button>
+<form #calcOverviewForm="ngForm">
+
+  <mat-form-field>
+    <input (blur)="onSaveSessionName()"
+           [(ngModel)]="RootSession.Name"
+           matInput
+           name="input_rootSessionName"
+           placeholder="Session Name">
+  </mat-form-field>
+
+  <mat-form-field>
+    <input [(ngModel)]="RootSession.SessionId"
+           disabled
+           matInput
+           name="input_rootSessionId"
+           placeholder="Root Session ID">
+  </mat-form-field>
+
+  <button (click)="on_btn_loadProfile()"
+          mat-stroked-button>
+    Load Profile
+  </button>
+
+</form>

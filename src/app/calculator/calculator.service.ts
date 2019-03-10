@@ -1,9 +1,9 @@
 import {Injectable} from '@angular/core';
-import {CalculatorSession} from "../model/calculator-session";
-import {StorageService} from "../storage/storage.service";
-import {FactorioRecipe} from "../model/factorio-recipe";
-import {FactorioCraftingMachine} from "../model/factorio-crafting-machine";
-import {FactorioModule} from "../model/factorio-module";
+import {CalculatorSession} from '../model/calculator-session';
+import {StorageService} from '../storage/storage.service';
+import {FactorioRecipe} from '../model/factorio-recipe';
+import {FactorioCraftingMachine} from '../model/factorio-crafting-machine';
+import {FactorioModule} from '../model/factorio-module';
 
 @Injectable({
   providedIn: 'root'
@@ -100,7 +100,7 @@ export class CalculatorService {
     this.storeSessions();
   }
 
-  private storeSessions() {
+  public storeSessions() {
     localStorage.setItem(this._sessionsKey, JSON.stringify(this._currentSessions));
   }
 

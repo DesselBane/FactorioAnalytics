@@ -1,10 +1,10 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {CalculatorSession} from "../../model/calculator-session";
-import {SettingsService} from "../../settings/settings.service";
-import {MatDialog} from "@angular/material";
-import {LoadProfileSelectorDialogComponent} from "../../view-models/load-profile-selector-dialog/load-profile-selector-dialog.component";
-import {Settings} from "../../model/settings";
-import {CalculatorService} from "../calculator.service";
+import {CalculatorSession} from '../../model/calculator-session';
+import {SettingsService} from '../../settings/settings.service';
+import {MatDialog} from '@angular/material';
+import {LoadProfileSelectorDialogComponent} from '../../view-models/load-profile-selector-dialog/load-profile-selector-dialog.component';
+import {Settings} from '../../model/settings';
+import {CalculatorService} from '../calculator.service';
 
 @Component({
   selector: 'app-calculator-globals',
@@ -40,6 +40,8 @@ export class CalculatorGlobalsComponent implements OnInit {
   }
 
   ngOnInit() {
+    //TODO load default profile
+
   }
 
   private setProfileForSession(currentSession: CalculatorSession, settings: Settings) {
@@ -58,5 +60,9 @@ export class CalculatorGlobalsComponent implements OnInit {
     for (let subsession of currentSession.SubSessions) {
       this.setProfileForSession(subsession, settings);
     }
+  }
+
+  onSaveSessionName() {
+    this._calcService.storeSessions();
   }
 }

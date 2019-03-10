@@ -1,0 +1,14 @@
+form {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+mat-form-field {
+  flex-grow: 1;
+  margin: .5em;
+}
+
+button {
+  margin: .5em;
+}
