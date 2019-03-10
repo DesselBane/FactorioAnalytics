@@ -1,10 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute} from "@angular/router";
-import {CalculatorService} from "../calculator.service";
-import {CalculatorSession} from "../../model/calculator-session";
-import {NestedTreeControl} from "@angular/cdk/tree";
-import {MatTreeNestedDataSource} from "@angular/material";
-import {of} from "rxjs";
+import {ActivatedRoute} from '@angular/router';
+import {CalculatorService} from '../calculator.service';
+import {CalculatorSession} from '../../model/calculator-session';
 
 @Component({
   selector: 'app-calculator-overview',
@@ -15,8 +12,6 @@ export class CalculatorOverviewComponent implements OnInit {
 
   private _activatedRoute: ActivatedRoute;
   private _calculatorService: CalculatorService;
-  public nestedTreeControl: NestedTreeControl<CalculatorSession>;
-  public nestedDataSource: MatTreeNestedDataSource<any>;
   public RootSession: CalculatorSession;
 
 
@@ -24,22 +19,12 @@ export class CalculatorOverviewComponent implements OnInit {
               calculatorService: CalculatorService) {
     this._activatedRoute = activatedRoute;
     this._calculatorService = calculatorService;
-
-    this.nestedTreeControl = new NestedTreeControl<CalculatorSession>((node: CalculatorSession) => of(node.SubSessions));
-    this.nestedDataSource = new MatTreeNestedDataSource();
-
-
   }
 
   ngOnInit() {
     this._activatedRoute.paramMap.subscribe(x => {
       this.RootSession = this._calculatorService.getSession(x.get('id'));
-      this.nestedDataSource.data = [this.RootSession];
-      console.log(this.nestedDataSource.data);
     });
   }
-
-  hasNestedChildren = (_: number, nodeData: CalculatorSession) => nodeData.SubSessions.length > 0;
-
 
 }

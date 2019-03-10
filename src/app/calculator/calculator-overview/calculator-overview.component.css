@@ -1,15 +1,3 @@
-.invisible-subtree {
-  display: none;
-}
-
-app-calculator-details {
-  width: 100%;
-}
-
-.mat-tree-node {
-  align-items: normal;
-}
-
 mat-card {
   margin: .5em;
 }
