@@ -14,9 +14,11 @@
              matInput
              name="input_targetAmountPerSecond"
              (change)="targetAmountChanged()"
+             (blur)="targetAmountChanged()"
              [matAutocomplete]="limitations"
              placeholder="Target Amount Per Second">
-      <mat-autocomplete #limitations="matAutocomplete">
+      <mat-autocomplete #limitations="matAutocomplete"
+                        (optionSelected)="targetAmountChanged()">
         <mat-option *ngFor="let limit of limitationsData" [value]="limit.value">
           {{limit.value | number:'2.2-2'}} - {{limit.name}}
         </mat-option>
