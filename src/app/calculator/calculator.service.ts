@@ -4,6 +4,8 @@ import {StorageService} from '../storage/storage.service';
 import {FactorioRecipe} from '../model/factorio-recipe';
 import {FactorioCraftingMachine} from '../model/factorio-crafting-machine';
 import {FactorioModule} from '../model/factorio-module';
+import {Settings} from '../model/settings';
+import {SettingsService} from '../settings/settings.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,9 +15,12 @@ export class CalculatorService {
   private readonly _sessionsKey = "calculator-service-sessions";
   private readonly _currentSessions: CalculatorSession[] = [];
   private _storageService: StorageService;
+  private _settingsService: SettingsService;
 
-  constructor(storageService: StorageService) {
+  constructor(storageService: StorageService,
+              settingsService: SettingsService) {
     this._storageService = storageService;
+    this._settingsService = settingsService;
     this._currentSessions = JSON.parse(localStorage.getItem(this._sessionsKey));
 
     if (this._currentSessions == null)
@@ -30,6 +35,13 @@ export class CalculatorService {
   public createSession(recipeName: string): string {
     let newSession = this.createSessionImpl(recipeName);
     this._currentSessions.push(newSession);
+
+    let defaultProfile = this._settingsService.loadProfile();
+
+    if (defaultProfile != null) {
+      this.setProfileForSession(newSession, defaultProfile);
+    }
+
     this.storeSessions();
 
     return newSession.SessionId;
@@ -175,5 +187,23 @@ export class CalculatorService {
     currentSession.Beacons.splice(index, 1);
     CalculatorService.updateMulitplier(currentSession);
     this.updateForTargetAmount(currentSession);
+  }
+
+  public setProfileForSession(currentSession: CalculatorSession, settings: Settings) {
+    let categorySettings = settings.craftingCategorySettings.find(x => x.category === currentSession.Recipe.category);
+
+    if (categorySettings != null) {
+      this.updateCraftingMachine(currentSession, categorySettings.craftingMachine);
+      currentSession.CraftingMachine = categorySettings.craftingMachine;
+      currentSession.Modules = [];
+      currentSession.Beacons = [];
+
+      Object.assign(categorySettings.modules, currentSession.Modules);
+      Object.assign(categorySettings.beacons, currentSession.Beacons);
+    }
+
+    for (let subsession of currentSession.SubSessions) {
+      this.setProfileForSession(subsession, settings);
+    }
   }
 }
