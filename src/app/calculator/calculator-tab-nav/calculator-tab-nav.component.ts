@@ -23,8 +23,9 @@ export class CalculatorTabNavComponent implements OnInit {
 
   }
 
-  onCloseTab($event: MouseEvent) {
-    $event.stopPropagation();
-    alert('clicked');
+  onCloseTab(mouseEvent: MouseEvent, session: CalculatorSession) {
+    mouseEvent.stopPropagation();
+    this._calcService.removeSession(session.SessionId);
+    this.ActiveCalcSessions = this._calcService.getAllSessions();
   }
 }
