@@ -95,6 +95,8 @@ export class CalculatorService {
         newSession.SubSessions.push(subSession);
     }
 
+    newSession.Name = recipeName.replace('-', ' ');
+
     return newSession;
   }
 

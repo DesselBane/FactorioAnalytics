@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {CalculatorService} from '../calculator.service';
 import {CalculatorSession} from '../../model/calculator-session';
@@ -14,6 +14,8 @@ export class CalculatorOverviewComponent implements OnInit {
   private _calculatorService: CalculatorService;
   public RootSession: CalculatorSession;
 
+  @Input()
+  public SessionId: string;
 
   constructor(activatedRoute: ActivatedRoute,
               calculatorService: CalculatorService) {
@@ -22,9 +24,7 @@ export class CalculatorOverviewComponent implements OnInit {
   }
 
   ngOnInit() {
-    this._activatedRoute.paramMap.subscribe(x => {
-      this.RootSession = this._calculatorService.getSession(x.get('id'));
-    });
+    this.RootSession = this._calculatorService.getSession(this.SessionId);
   }
 
 }

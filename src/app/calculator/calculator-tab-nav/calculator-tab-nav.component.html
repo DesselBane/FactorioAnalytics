@@ -1,0 +1,13 @@
+<mat-tab-group>
+  <mat-tab *ngFor="let session of ActiveCalcSessions">
+    <ng-template matTabLabel>
+      <span>{{session.Name || 'Unnamed'}}</span>
+      <button (click)="onCloseTab($event)" mat-stroked-button>
+        <mat-icon>close</mat-icon>
+      </button>
+    </ng-template>
+    <ng-template matTabContent>
+      <app-calculator-overview [SessionId]="session.SessionId"></app-calculator-overview>
+    </ng-template>
+  </mat-tab>
+</mat-tab-group>

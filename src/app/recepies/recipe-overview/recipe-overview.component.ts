@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute, ParamMap, Router} from "@angular/router";
-import {FactorioRecipe} from "../../model/factorio-recipe";
-import {StorageService} from "../../storage/storage.service";
-import {CalculatorService} from "../../calculator/calculator.service";
+import {ActivatedRoute, ParamMap, Router} from '@angular/router';
+import {FactorioRecipe} from '../../model/factorio-recipe';
+import {StorageService} from '../../storage/storage.service';
+import {CalculatorService} from '../../calculator/calculator.service';
 
 @Component({
   selector: 'app-recipe-overview',
@@ -31,7 +31,7 @@ export class RecipeOverviewComponent implements OnInit {
   }
 
   createCalculatorSession() {
-    let sessionId = this._calculatorService.createSession(this._currentRecipe.name);
-    this._router.navigateByUrl("calculator/session/" + sessionId);
+    this._calculatorService.createSession(this._currentRecipe.name);
+    this._router.navigateByUrl('calculator/sessions');
   }
 }

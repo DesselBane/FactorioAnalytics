@@ -1,17 +1,19 @@
 import {NgModule} from '@angular/core';
 import {RouterModule} from '@angular/router';
-import {CalculatorOverviewComponent} from "./calculator-overview/calculator-overview.component";
-import {CalculatorHistoryComponent} from "./calculator-history/calculator-history.component";
+import {CalculatorHistoryComponent} from './calculator-history/calculator-history.component';
+import {CalculatorTabNavComponent} from './calculator-tab-nav/calculator-tab-nav.component';
 
 @NgModule({
-  imports: [RouterModule.forRoot([{
+  imports: [RouterModule.forRoot([
+    {
     path: 'calculator',
     children: [
-      {path: 'session/:id', component: CalculatorOverviewComponent},
+      {path: 'sessions', component: CalculatorTabNavComponent},
       {path: 'history', component: CalculatorHistoryComponent}
     ]
 
-  }])],
+    }
+  ])],
   exports: [RouterModule]
 })
 export class CalculatorRoutingModule {

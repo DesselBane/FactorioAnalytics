@@ -12,6 +12,7 @@ import {ViewModelsModule} from '../view-models/view-models.module';
 import {SettingsModule} from '../settings/settings.module';
 import {CalculatorGlobalsComponent} from './calculator-globals/calculator-globals.component';
 import {CalculatorTreeViewComponent} from './calculator-tree-view/calculator-tree-view.component';
+import {CalculatorTabNavComponent} from './calculator-tab-nav/calculator-tab-nav.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import {CalculatorTreeViewComponent} from './calculator-tree-view/calculator-tre
     CalculatorHistoryComponent,
     CalculatorGlobalsComponent,
     CalculatorTreeViewComponent,
+    CalculatorTabNavComponent,
   ],
   imports: [
     CommonModule,
