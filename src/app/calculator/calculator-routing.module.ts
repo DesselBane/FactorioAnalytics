@@ -1,6 +1,5 @@
 import {NgModule} from '@angular/core';
 import {RouterModule} from '@angular/router';
-import {CalculatorHistoryComponent} from './calculator-history/calculator-history.component';
 import {CalculatorTabNavComponent} from './calculator-tab-nav/calculator-tab-nav.component';
 
 @NgModule({
@@ -9,7 +8,6 @@ import {CalculatorTabNavComponent} from './calculator-tab-nav/calculator-tab-nav
     path: 'calculator',
     children: [
       {path: 'sessions', component: CalculatorTabNavComponent},
-      {path: 'history', component: CalculatorHistoryComponent}
     ]
 
     }

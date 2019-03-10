@@ -7,7 +7,6 @@ import {CalculatorOverviewComponent} from './calculator-overview/calculator-over
 import {CalculatorDetailsComponent} from './calculator-details/calculator-details.component';
 import {FormsModule} from '@angular/forms';
 import {PipesModule} from '../pipes/pipes.module';
-import {CalculatorHistoryComponent} from './calculator-history/calculator-history.component';
 import {ViewModelsModule} from '../view-models/view-models.module';
 import {SettingsModule} from '../settings/settings.module';
 import {CalculatorGlobalsComponent} from './calculator-globals/calculator-globals.component';
@@ -18,7 +17,6 @@ import {CalculatorTabNavComponent} from './calculator-tab-nav/calculator-tab-nav
   declarations: [
     CalculatorOverviewComponent,
     CalculatorDetailsComponent,
-    CalculatorHistoryComponent,
     CalculatorGlobalsComponent,
     CalculatorTreeViewComponent,
     CalculatorTabNavComponent,

@@ -7,6 +7,7 @@ import {FactorioModule} from '../model/factorio-module';
 import {Settings} from '../model/settings';
 import {SettingsService} from '../settings/settings.service';
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -95,7 +96,7 @@ export class CalculatorService {
         newSession.SubSessions.push(subSession);
     }
 
-    newSession.Name = recipeName.replace('-', ' ');
+    newSession.Name = recipeName.replace(new RegExp('-', 'g'), ' ');
 
     return newSession;
   }
